@@ -361,8 +361,8 @@
       </section>
 
       <section class="wrapper bg-light">
-        <div class="container py-14 py-md-16">
-          <div class="row gx-lg-8 gx-xl-12 gy-10 gy-lg-0 mb-11">
+        <div class="container py-6 py-md-8">
+          <div class="row gx-lg-8 gx-xl-12 gy-10 gy-lg-0 mb-4">
             <div class="col-lg-4">
               <h3 class="display-4 mb-3 pe-xl-10">Jumlah Keluarga</h3>
               <p class="lead fs-lg mb-0 pe-xxl-10">
@@ -410,122 +410,82 @@
             <!-- /column -->
           </div>
           <!-- /.row -->
-          <hr />
-          <h3 class="display-4 mb-3 text-center">Persentase Keluarga</h3>
+          <hr class="my-4" />
+          <h3 class="display-4 mb-3 text-center">Keluarga</h3>
           <p class="lead fs-lg mb-10 text-center">
             Berdasarkan Tingkat Kesejahteraan
           </p>
           <div class="row">
-            <div class="col-12">
-              <div class="card">
-                <div class="card-body">
-                  <canvas class="mx-lg-22" id="persentaseKemiskinan"></canvas>
+            <div class="col-lg-6 mb-6 d-flex align-items-stretch">
+              <div class="card w-100">
+                <div
+                  class="card-body d-flex justify-content-center align-items-center"
+                >
+                  <canvas id="persentaseKemiskinan"></canvas>
                 </div>
                 <!--/.card-body -->
               </div>
               <!--/.card -->
             </div>
             <!--/column -->
-          </div>
-          <!--/.row -->
-          <hr />
-          <h3 class="display-4 mb-3 text-center">Distribusi Keluarga</h3>
-          <p class="lead fs-lg mb-10 text-center">
-            Berdasarkan Tingkat Kesejahteraan
-          </p>
-          <div class="row">
-            <div class="col-12">
-              <div class="card">
-                <div class="card-body">
-                  <div id="distribusiKemiskinan" style="height: 300px"></div>
-                </div>
-                <!--/.card-body -->
-              </div>
-              <!--/.card -->
-            </div>
-            <!--/column -->
-          </div>
-          <!--/.row -->
-          <hr />
-          <h3 class="display-4 mb-3 text-center">Daftar Keluarga</h3>
-          <p class="lead fs-lg mb-10 text-center">
-            Berdasarkan Tingkat Kesejahteraan
-          </p>
-          <div class="row">
-            <div class="col-12">
-              <div class="card">
-                <div class="card-body">
+            <div class="col-lg-6 mb-6 d-flex align-items-stretch">
+              <div class="card w-100">
+                <div
+                  class="card-body d-flex justify-content-center align-items-center"
+                >
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
                         <tr>
-                          <th>Kode Wilayah</th>
                           <th>No KK</th>
-                          <th>Nama SLS</th>
-                          <th>Alamat</th>
                           <th>Nama Kepala Keluarga</th>
-                          <th>Jumlah Anggota Keluarga</th>
                           <th>Status Kesejahteraan</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td>1601052001</td>
                           <td>9999999999999999</td>
-                          <td>Dusun 1</td>
-                          <td>Dusun 1 Bandar Jaya</td>
                           <td>Fulan</td>
-                          <td>3</td>
                           <td>Miskin</td>
                         </tr>
                         <tr>
-                          <td>1601052001</td>
                           <td>9999999999999999</td>
-                          <td>Dusun 1</td>
-                          <td>Dusun 1 Bandar Jaya</td>
                           <td>Fulan</td>
-                          <td>3</td>
                           <td>Miskin</td>
                         </tr>
                         <tr>
-                          <td>1601052001</td>
                           <td>9999999999999999</td>
-                          <td>Dusun 1</td>
-                          <td>Dusun 1 Bandar Jaya</td>
                           <td>Fulan</td>
-                          <td>3</td>
                           <td>Miskin</td>
                         </tr>
                         <tr>
-                          <td>1601052001</td>
                           <td>9999999999999999</td>
-                          <td>Dusun 1</td>
-                          <td>Dusun 1 Bandar Jaya</td>
                           <td>Fulan</td>
-                          <td>3</td>
                           <td>Miskin</td>
                         </tr>
                         <tr>
-                          <td>1601052001</td>
                           <td>9999999999999999</td>
-                          <td>Dusun 1</td>
-                          <td>Dusun 1 Bandar Jaya</td>
                           <td>Fulan</td>
-                          <td>3</td>
                           <td>Miskin</td>
                         </tr>
                         <tr>
-                          <td>1601052001</td>
                           <td>9999999999999999</td>
-                          <td>Dusun 1</td>
-                          <td>Dusun 1 Bandar Jaya</td>
                           <td>Fulan</td>
-                          <td>3</td>
                           <td>Miskin</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
+                </div>
+                <!--/.card-body -->
+              </div>
+              <!--/.card -->
+            </div>
+            <!--/column -->
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                  <div id="distribusiKemiskinan" style="height: 300px"></div>
                 </div>
                 <!--/.card-body -->
               </div>
@@ -756,7 +716,7 @@
           const ctx = document.getElementById("persentaseKemiskinan");
 
           const chart = new Chart(ctx, {
-            type: "doughnut",
+            type: "pie",
             data: {
               labels: ["Sangat Miskin", "Miskin", "Tidak Miskin"],
               datasets: [
