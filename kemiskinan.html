@@ -356,7 +356,9 @@
           <div class="row gx-lg-8 gx-xl-12 gy-10 gy-lg-0 mb-4">
             <div class="col-lg-4">
               <h3 class="display-4 mb-3 pe-xl-10">Jumlah Keluarga</h3>
-              <h1 class="display-1 mb-0 pe-xxl-10">{{ jumlahKeluarga }}</h1>
+              <h1 class="display-1 mb-0 pe-xxl-10 counter">
+                {{ jumlahKeluarga }}
+              </h1>
             </div>
             <!-- /column -->
             <div class="col-lg-8 mt-lg-2">
@@ -366,7 +368,7 @@
                 <div class="col-md-4">
                   <img
                     src="./assets/img/icons/lineal/group.svg"
-                    class="svg-inject icon-svg icon-svg-md text-primary mb-3"
+                    class="icon-svg icon-svg-md text-primary mb-3"
                     alt=""
                   />
                   <h3 class="counter">
@@ -379,7 +381,7 @@
                 <div class="col-md-4">
                   <img
                     src="./assets/img/icons/lineal/savings.svg"
-                    class="svg-inject icon-svg icon-svg-md text-primary mb-3"
+                    class="icon-svg icon-svg-md text-primary mb-3"
                     alt=""
                   />
                   <h3 class="counter">
@@ -392,7 +394,7 @@
                 <div class="col-md-4">
                   <img
                     src="./assets/img/icons/lineal/tie.svg"
-                    class="svg-inject icon-svg icon-svg-md text-primary mb-3"
+                    class="icon-svg icon-svg-md text-primary mb-3"
                     alt=""
                   />
                   <h3 class="counter">
@@ -835,15 +837,16 @@
           },
         },
         mounted() {
-          this.getStatusKesejahteraanKeluarga();
-          this.getKeluarga();
-          this.createMap();
           const pluginsjs = document.createElement("script");
           pluginsjs.setAttribute("src", "./assets/js/plugins.js");
           document.head.appendChild(pluginsjs);
           const themejs = document.createElement("script");
           themejs.setAttribute("src", "./assets/js/theme.js");
           document.head.appendChild(themejs);
+          this.loadjs = true;
+          this.getStatusKesejahteraanKeluarga();
+          this.getKeluarga();
+          this.createMap();
         },
       }).mount("#app");
     </script>
