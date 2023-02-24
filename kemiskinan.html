@@ -356,9 +356,7 @@
           <div class="row gx-lg-8 gx-xl-12 gy-10 gy-lg-0 mb-4">
             <div class="col-lg-4">
               <h3 class="display-4 mb-3 pe-xl-10">Jumlah Keluarga</h3>
-              <h1 class="display-1 mb-0 pe-xxl-10 counter">
-                {{ jumlahKeluarga }}
-              </h1>
+              <h1 class="display-1 mb-0 pe-xxl-10">{{ jumlahKeluarga }}</h1>
             </div>
             <!-- /column -->
             <div class="col-lg-8 mt-lg-2">
@@ -373,7 +371,9 @@
                   />
                   <h3 class="counter">
                     {{ statusKesejahteraanKeluarga ?
-                    statusKesejahteraanKeluarga.sangat_miskin : "" }}
+                    statusKesejahteraanKeluarga.sangat_miskin + " (" +
+                    statusKesejahteraanKeluargaPersentase.sangat_miskin + "%) "
+                    : "" }}
                   </h3>
                   <p>Sangat Miskin</p>
                 </div>
@@ -386,7 +386,8 @@
                   />
                   <h3 class="counter">
                     {{ statusKesejahteraanKeluarga ?
-                    statusKesejahteraanKeluarga.miskin : "" }}
+                    statusKesejahteraanKeluarga.miskin + " (" +
+                    statusKesejahteraanKeluargaPersentase.miskin + "%) " : "" }}
                   </h3>
                   <p>Miskin</p>
                 </div>
@@ -399,7 +400,9 @@
                   />
                   <h3 class="counter">
                     {{ statusKesejahteraanKeluarga ?
-                    statusKesejahteraanKeluarga.tidak_miskin : "" }}
+                    statusKesejahteraanKeluarga.tidak_miskin + " (" +
+                    statusKesejahteraanKeluargaPersentase.tidak_miskin + "%) " :
+                    "" }}
                   </h3>
                   <p>Tidak Miskin</p>
                 </div>
@@ -439,49 +442,62 @@
             </div>
             <!--/column -->
             <div class="col-12">
-              <div class="card w-100">
-                <div
-                  class="card-body d-flex flex-column justify-content-center align-items-center"
-                >
-                  <div class="table-responsive" ref="tabelKemiskinan">
-                    <table class="table table-hover">
-                      <thead>
-                        <tr>
-                          <th>No KK</th>
-                          <th>Nama Kepala Keluarga</th>
-                          <th>Status Kesejahteraan</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr
-                          @click="getLokasi(k.latitude, k.longitude, k.nama_kepala)"
-                          v-for="k in keluarga.data"
-                        >
-                          <td>{{ k.no_kk }}</td>
-                          <td>{{ k.nama_kepala }}</td>
-                          <td>
-                            {{ statusKesejahteraanLabel[k.status_kesejahteraan]
-                            }}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="table-responsive" ref="tabelKemiskinan">
+                        <table class="table table-hover">
+                          <thead>
+                            <tr>
+                              <th>No KK</th>
+                              <th>Nama Kepala Keluarga</th>
+                              <th>Jumlah Anggota Keluarga</th>
+                              <th>Desa/Kelurahan</th>
+                              <th>Alamat</th>
+                              <th>Status Kesejahteraan</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr
+                              @click="getLokasi(k.latitude, k.longitude, k.nama_kepala)"
+                              v-for="k in keluarga.data"
+                            >
+                              <td>{{ k.no_kk }}</td>
+                              <td>{{ k.nama_kepala }}</td>
+                              <td>{{ k.jumlah_art }}</td>
+                              <td>{{ k.nama_sls }}</td>
+                              <td>{{ k.alamat }}</td>
+                              <td>
+                                {{
+                                statusKesejahteraanLabel[k.status_kesejahteraan]
+                                }}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center">
+                      <div class="table-responsive">
+                        <nav aria-label="pagination keluarga">
+                          <ul class="pagination">
+                            <li
+                              class="page-item"
+                              :class="{ disabled: l.active || !l.url }"
+                              v-for="l in keluarga.links"
+                            >
+                              <a class="page-link" @click="getKeluarga(l.url)"
+                                ><span
+                                  v-html="l.label.replace('Previous', '').replace('Next', '')"
+                                ></span
+                              ></a>
+                            </li>
+                          </ul>
+                        </nav>
+                      </div>
+                    </div>
                   </div>
-                  <nav aria-label="pagination keluarga">
-                    <ul class="pagination">
-                      <li
-                        class="page-item"
-                        :class="{ disabled: l.active || !l.url }"
-                        v-for="l in keluarga.links"
-                      >
-                        <a class="page-link" @click="getKeluarga(l.url)"
-                          ><span
-                            v-html="l.label.replace('Previous', '').replace('Next', '')"
-                          ></span
-                        ></a>
-                      </li>
-                    </ul>
-                  </nav>
                 </div>
                 <!--/.card-body -->
               </div>
@@ -670,8 +686,8 @@
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/chart.js/dist/chart.umd.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.6.3.min.js"
       integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
@@ -726,12 +742,14 @@
             tooltipMap: "",
             keluarga: {},
             statusKesejahteraanKeluarga: "",
+            statusKesejahteraanKeluargaPersentase: "",
             statusKesejahteraanSelected: "",
             statusKesejahteraanLabel: {
               1: "Sangat Miskin",
               2: "Miskin",
               3: "Tidak Miskin",
             },
+            jumlahKeluarga: 0,
           };
         },
         methods: {
@@ -777,6 +795,26 @@
                     inline: "start",
                   });
                 },
+                plugins: {
+                  tooltip: {
+                    enabled: true,
+                    callbacks: {
+                      label: (context) => {
+                        var index = context.dataset.data.indexOf(context.raw);
+                        return (
+                          Object.values(this.statusKesejahteraanKeluarga)[
+                            index
+                          ] +
+                          " (" +
+                          Object.values(
+                            this.statusKesejahteraanKeluargaPersentase
+                          )[index] +
+                          "%)"
+                        );
+                      },
+                    },
+                  },
+                },
               },
             });
           },
@@ -791,6 +829,20 @@
               )
               .then((d) => {
                 this.statusKesejahteraanKeluarga = d.data.datas[0];
+                this.jumlahKeluarga = 0;
+                for (k in this.statusKesejahteraanKeluarga)
+                  this.jumlahKeluarga += Number(
+                    this.statusKesejahteraanKeluarga[k]
+                  );
+                this.statusKesejahteraanKeluargaPersentase = {};
+                for (k in this.statusKesejahteraanKeluarga)
+                  this.statusKesejahteraanKeluargaPersentase[k] =
+                    Math.round(
+                      (Number(this.statusKesejahteraanKeluarga[k]) /
+                        Number(this.jumlahKeluarga)) *
+                        100 *
+                        100
+                    ) / 100;
                 this.createChart();
               });
           },
@@ -810,9 +862,9 @@
             });
           },
           getLokasi(lat, lng, nama) {
+            if (this.markerMap) this.map.removeLayer(this.markerMap);
+            if (this.tooltipMap) this.map.removeLayer(this.tooltipMap);
             if (lat && lng) {
-              if (this.markerMap) this.map.removeLayer(this.markerMap);
-              if (this.tooltipMap) this.map.removeLayer(this.tooltipMap);
               this.markerMap = L.marker([lat, lng]).addTo(this.map);
               this.tooltipMap = L.tooltip([lat, lng], {
                 content: nama,
@@ -824,29 +876,22 @@
                 block: "start",
                 inline: "start",
               });
-            }
+            } else this.map.setView([-2.990934, 104.756554], 7);
           },
-        },
-        computed: {
-          jumlahKeluarga() {
-            var total = 0;
-            if (this.statusKesejahteraanKeluarga)
-              for (k in this.statusKesejahteraanKeluarga)
-                total += Number(this.statusKesejahteraanKeluarga[k]);
-            return total;
+          loadJS() {
+            const pluginsjs = document.createElement("script");
+            pluginsjs.setAttribute("src", "./assets/js/plugins.js");
+            document.head.appendChild(pluginsjs);
+            const themejs = document.createElement("script");
+            themejs.setAttribute("src", "./assets/js/theme.js");
+            document.head.appendChild(themejs);
           },
         },
         mounted() {
-          const pluginsjs = document.createElement("script");
-          pluginsjs.setAttribute("src", "./assets/js/plugins.js");
-          document.head.appendChild(pluginsjs);
-          const themejs = document.createElement("script");
-          themejs.setAttribute("src", "./assets/js/theme.js");
-          document.head.appendChild(themejs);
-          this.loadjs = true;
           this.getStatusKesejahteraanKeluarga();
           this.getKeluarga();
           this.createMap();
+          this.loadJS();
         },
       }).mount("#app");
     </script>
