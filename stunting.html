@@ -339,9 +339,11 @@
                     <a href="./monograph.html">Monograph</a>
                   </li>
                   <li>
-                    <a class="active" href="./kemiskinan.html">Kemiskinan</a>
+                    <a href="./kemiskinan.html">Kemiskinan</a>
                   </li>
-                  <li><a href="./stunting.html">Stunting</a></li>
+                  <li>
+                    <a class="active" href="./stunting.html">Stunting</a>
+                  </li>
                   <li><a href="#">UMKM</a></li>
                   <li><a href="#">Peta Tematik</a></li>
                 </ul>
@@ -353,159 +355,190 @@
 
       <section class="wrapper bg-light">
         <div class="container py-6 py-md-8">
-          <div class="row gx-lg-8 gx-xl-12 gy-10 gy-lg-0 mb-4">
-            <div class="col-lg-4">
-              <h3 class="display-4 mb-3 pe-xl-10">Jumlah Keluarga</h3>
-              <h1 class="display-1 mb-0 pe-xxl-10">{{ jumlahKeluarga }}</h1>
-            </div>
-            <!-- /column -->
-            <div class="col-lg-8 mt-lg-2">
-              <div
-                class="row align-items-center counter-wrapper gy-6 text-center"
-              >
-                <div class="col-md-4">
-                  <img
-                    src="./assets/img/icons/lineal/group.svg"
-                    class="icon-svg icon-svg-md text-primary mb-3"
-                    alt=""
-                  />
-                  <h3 class="counter">
-                    {{ statusKesejahteraanKeluarga ?
-                    statusKesejahteraanKeluarga.sangat_miskin + " (" +
-                    statusKesejahteraanKeluargaPersentase.sangat_miskin + "%) "
-                    : "" }}
-                  </h3>
-                  <p>Sangat Miskin</p>
-                </div>
-                <!--/column -->
-                <div class="col-md-4">
-                  <img
-                    src="./assets/img/icons/lineal/savings.svg"
-                    class="icon-svg icon-svg-md text-primary mb-3"
-                    alt=""
-                  />
-                  <h3 class="counter">
-                    {{ statusKesejahteraanKeluarga ?
-                    statusKesejahteraanKeluarga.miskin + " (" +
-                    statusKesejahteraanKeluargaPersentase.miskin + "%) " : "" }}
-                  </h3>
-                  <p>Miskin</p>
-                </div>
-                <!--/column -->
-                <div class="col-md-4">
-                  <img
-                    src="./assets/img/icons/lineal/tie.svg"
-                    class="icon-svg icon-svg-md text-primary mb-3"
-                    alt=""
-                  />
-                  <h3 class="counter">
-                    {{ statusKesejahteraanKeluarga ?
-                    statusKesejahteraanKeluarga.tidak_miskin + " (" +
-                    statusKesejahteraanKeluargaPersentase.tidak_miskin + "%) " :
-                    "" }}
-                  </h3>
-                  <p>Tidak Miskin</p>
-                </div>
-                <!--/column -->
-              </div>
-              <!--/.row -->
+          <div class="row text-center">
+            <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+              <h3 class="display-4 mb-2 px-xl-10">Penduduk Stunting</h3>
+              <p>
+                <b><i>Stunting</i></b> adalah gangguan pertumbuhan dan
+                perkembangan anak akibat kekurangan gizi kronis dan infeksi
+                berulang, yang ditandai dengan panjang atau tinggi badannya
+                berada di bawah standar
+              </p>
             </div>
             <!-- /column -->
           </div>
           <!-- /.row -->
-          <hr class="my-4" />
-          <h3 class="display-4 mb-3 text-center">Keluarga</h3>
-          <p class="lead fs-lg mb-10 text-center">
-            Berdasarkan Tingkat Kesejahteraan
-          </p>
-          <div class="row">
-            <div class="col-lg-6 mb-6 d-flex align-items-stretch">
-              <div class="card w-100">
-                <div
-                  class="card-body d-flex justify-content-center align-items-center"
-                >
-                  <canvas ref="persentaseKemiskinan"></canvas>
-                </div>
-                <!--/.card-body -->
-              </div>
-              <!--/.card -->
-            </div>
-            <!--/column -->
-            <div class="col-lg-6 mb-6 d-flex align-items-stretch">
-              <div class="card w-100">
-                <div class="card-body">
-                  <div ref="petaKemiskinan" style="height: 600px"></div>
-                </div>
-                <!--/.card-body -->
-              </div>
-              <!--/.card -->
-            </div>
-            <!--/column -->
-            <div class="col-12">
-              <div class="card">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="table-responsive" ref="tabelKemiskinan">
-                        <table class="table table-hover">
-                          <thead>
-                            <tr>
-                              <th>No KK</th>
-                              <th>Nama Kepala Keluarga</th>
-                              <th>Jumlah Anggota Keluarga</th>
-                              <th>Satuan Lingkungan Setempat</th>
-                              <th>Alamat</th>
-                              <th>Status Kesejahteraan</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr
-                              @click="getLokasi(k.latitude, k.longitude, k.nama_kepala)"
-                              v-for="k in keluarga.data"
-                            >
-                              <td>{{ k.no_kk }}</td>
-                              <td>{{ k.nama_kepala }}</td>
-                              <td>{{ k.jumlah_art }}</td>
-                              <td>{{ k.nama_sls }}</td>
-                              <td>{{ k.alamat }}</td>
-                              <td>
-                                {{
-                                statusKesejahteraanLabel[k.status_kesejahteraan]
-                                }}
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
+          <div class="position-relative mb-14 mb-md-17">
+            <div
+              class="shape rounded-circle bg-soft-primary rellax w-16 h-16"
+              data-rellax-speed="1"
+              style="bottom: -0.5rem; right: -2.5rem; z-index: 0"
+            ></div>
+            <div
+              class="shape bg-dot primary rellax w-16 h-17"
+              data-rellax-speed="1"
+              style="top: -0.5rem; left: -2.5rem; z-index: 0"
+            ></div>
+            <div class="row gx-md-5 gy-5 text-center">
+              <div class="col-md-6 col-xl-4">
+                <div class="card">
+                  <div class="card-body">
+                    <div
+                      class="icon btn btn-circle btn-lg btn-primary disabled mb-3"
+                    >
+                      <i class="uil uil-phone-volume"></i>
                     </div>
-                    <div class="col-12 d-flex justify-content-center">
-                      <div class="table-responsive">
-                        <nav aria-label="pagination keluarga">
-                          <ul class="pagination">
-                            <li
-                              class="page-item"
-                              :class="{ disabled: l.active || !l.url }"
-                              v-for="l in keluarga.links"
-                            >
-                              <a class="page-link" @click="getKeluarga(l.url)"
-                                ><span
-                                  v-html="l.label.replace('Previous', '').replace('Next', '')"
-                                ></span
-                              ></a>
-                            </li>
-                          </ul>
-                        </nav>
+                    <h4>Stunting</h4>
+                    <h1 class="display-1 mb-2">100</h1>
+                    <a
+                      class="more hover link-primary"
+                      @click="statusStuntingSelected = 1"
+                      >Lihat</a
+                    >
+                  </div>
+                  <!--/.card-body -->
+                </div>
+                <!--/.card -->
+              </div>
+              <!--/column -->
+              <div class="col-md-6 col-xl-4">
+                <div class="card">
+                  <div class="card-body">
+                    <div
+                      class="icon btn btn-circle btn-lg btn-primary disabled mb-3"
+                    >
+                      <i class="uil uil-shield-exclamation"></i>
+                    </div>
+                    <h4>Potensi Stunting</h4>
+                    <h1 class="display-1 mb-2">50</h1>
+                    <a
+                      class="more hover link-primary"
+                      @click="statusStuntingSelected = 2"
+                      >Lihat</a
+                    >
+                  </div>
+                  <!--/.card-body -->
+                </div>
+                <!--/.card -->
+              </div>
+              <!--/column -->
+              <div class="col-md-6 col-xl-4">
+                <div class="card">
+                  <div class="card-body">
+                    <div
+                      class="icon btn btn-circle btn-lg btn-primary disabled mb-3"
+                    >
+                      <i class="uil uil-laptop-cloud"></i>
+                    </div>
+                    <h4>Tidak Stunting</h4>
+                    <h1 class="display-1 mb-2">1500</h1>
+                    <a
+                      class="more hover link-primary"
+                      @click="statusStuntingSelected = 0"
+                      >Lihat</a
+                    >
+                  </div>
+                  <!--/.card-body -->
+                </div>
+                <!--/.card -->
+              </div>
+              <!--/column -->
+            </div>
+            <!--/.row -->
+            <hr class="my-6" />
+            <h3 class="display-4 mb-6 text-center">Penduduk</h3>
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12 mb-2">
+                        <div class="table-responsive" ref="tabelStunting">
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>NIK</th>
+                                <th>No KK</th>
+                                <th>Nama Lengkap</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Tempat Lahir</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Umur</th>
+                                <th>Pendidikan Terakhir</th>
+                                <th>Status Pekerjaan</th>
+                                <th>Pekerjaan</th>
+                                <th>Jenis Pekerjaan</th>
+                                <th>Nama SLS</th>
+                                <th>Alamat</th>
+                                <th>Status Stunting</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr v-for="p in penduduk.data">
+                                <td>{{ p.nik }}</td>
+                                <td>{{ p.no_kk }}</td>
+                                <td>{{ p.nama_lengkap }}</td>
+                                <td>
+                                  {{ nameKategori(p.jenis_kelamin,
+                                  "jenis_kelamin") }}
+                                </td>
+                                <td>{{ p.tempat_lahir }}</td>
+                                <td>{{ p.tanggal_lahir }}</td>
+                                <td>{{ p.umur }}</td>
+                                <td>
+                                  {{ nameKategori(p.pendidikan_terakhir,
+                                  "pendidikan") }}
+                                </td>
+                                <td>
+                                  {{ p.status_pekerjaan == 1 ? "Bekerja" :
+                                  "Tidak Bekerja" }}
+                                </td>
+                                <td>{{ p.pekerjaan }}</td>
+                                <td>
+                                  {{ nameKategori(p.jenis_pekerjaan,
+                                  "lap_usaha") }}
+                                </td>
+                                <td>{{ p.nama_sls }}</td>
+                                <td>{{ p.alamat }}</td>
+                                <td>
+                                  {{ nameKategori(p.status_stunting, "stunting")
+                                  }}
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="col-12 d-flex justify-content-center">
+                        <div class="table-responsive">
+                          <nav aria-label="pagination penduduk">
+                            <ul class="pagination">
+                              <li
+                                class="page-item"
+                                :class="{ disabled: l.active || !l.url }"
+                                v-for="l in penduduk.links"
+                              >
+                                <a class="page-link" @click="getPenduduk(l.url)"
+                                  ><span
+                                    v-html="l.label.replace('Previous', '').replace('Next', '')"
+                                  ></span
+                                ></a>
+                              </li>
+                            </ul>
+                          </nav>
+                        </div>
                       </div>
                     </div>
                   </div>
+                  <!--/.card-body -->
                 </div>
-                <!--/.card-body -->
+                <!--/.card -->
               </div>
-              <!--/.card -->
+              <!--/column -->
             </div>
-            <!--/column -->
+            <!--/.row -->
           </div>
-          <!--/.row -->
+          <!-- /.position-relative -->
         </div>
         <!-- /.container -->
       </section>
@@ -737,146 +770,42 @@
           return {
             url: "https://descan.bpssumsel.com/api/",
             kode: "1601052001",
-            map: "",
-            markerMap: "",
-            tooltipMap: "",
-            keluarga: "",
-            statusKesejahteraanKeluarga: "",
-            statusKesejahteraanKeluargaPersentase: "",
-            statusKesejahteraanSelected: "",
-            statusKesejahteraanLabel: {
-              1: "Sangat Miskin",
-              2: "Miskin",
-              3: "Tidak Miskin",
-            },
-            jumlahKeluarga: 0,
+            kategori: "",
+            penduduk: "",
+            statusStuntingSelected: "",
           };
         },
         methods: {
-          createMap() {
-            this.map = L.map(this.$refs["petaKemiskinan"], {
-              attributionControl: false,
-            }).setView([-2.990934, 104.756554], 7);
-            L.tileLayer("https://{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}", {
-              subdomains: ["mt0", "mt1", "mt2", "mt3"],
-            }).addTo(this.map);
-          },
-          createChart() {
-            const chart = new Chart(this.$refs["persentaseKemiskinan"], {
-              type: "pie",
-              data: {
-                labels: Object.values(this.statusKesejahteraanLabel),
-                datasets: [
-                  {
-                    data: Object.values(this.statusKesejahteraanKeluarga),
-                  },
-                ],
-              },
-              options: {
-                offset: 20,
-                onClick: (e) => {
-                  const points = chart.getElementsAtEventForMode(
-                    e,
-                    "point",
-                    { intersect: true },
-                    true
-                  );
-                  if (points.length)
-                    for (k in this.statusKesejahteraanLabel)
-                      if (
-                        this.statusKesejahteraanLabel[k] ==
-                        chart.data.labels[points[0].index]
-                      )
-                        this.statusKesejahteraanSelected = k;
-                  this.getKeluarga();
-                  this.$refs["tabelKemiskinan"].scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                    inline: "start",
-                  });
-                },
-                plugins: {
-                  tooltip: {
-                    enabled: true,
-                    callbacks: {
-                      label: (context) => {
-                        var index = context.dataset.data.indexOf(context.raw);
-                        return (
-                          Object.values(this.statusKesejahteraanKeluarga)[
-                            index
-                          ] +
-                          " (" +
-                          Object.values(
-                            this.statusKesejahteraanKeluargaPersentase
-                          )[index] +
-                          "%)"
-                        );
-                      },
-                    },
-                  },
-                },
-              },
-            });
-          },
-          getStatusKesejahteraanKeluarga() {
-            this.statusKesejahteraanKeluarga = "";
-            axios
-              .get(
-                this.url +
-                  "keluarga_miskin/" +
-                  this.kode +
-                  "/sum_status_kesejahteraan"
-              )
-              .then((d) => {
-                this.statusKesejahteraanKeluarga = d.data.datas[0];
-                this.jumlahKeluarga = 0;
-                for (k in this.statusKesejahteraanKeluarga)
-                  this.jumlahKeluarga += Number(
-                    this.statusKesejahteraanKeluarga[k]
-                  );
-                this.statusKesejahteraanKeluargaPersentase = {};
-                for (k in this.statusKesejahteraanKeluarga)
-                  this.statusKesejahteraanKeluargaPersentase[k] =
-                    Math.round(
-                      (Number(this.statusKesejahteraanKeluarga[k]) /
-                        Number(this.jumlahKeluarga)) *
-                        100 *
-                        100
-                    ) / 100;
-                this.createChart();
+          async getKategori() {
+            try {
+              let total = await axios.get(this.url + "kategori");
+              total = total.data.datas.total;
+              axios.get(this.url + "kategori?per_page=" + total).then((d) => {
+                this.kategori = d.data.datas.data;
               });
+            } catch (error) {}
           },
-          getKeluarga(suffix) {
-            this.keluarga = "";
+          nameKategori(kode, tag) {
+            let kategoriByTag = this.kategori.filter((k) => k.tag == tag);
+            let kategoriGetKode = kategoriByTag.find((k) => k.kode == kode);
+            if (kategoriGetKode) return kategoriGetKode.name;
+            else return "";
+          },
+          getPenduduk(suffix) {
+            this.penduduk = "";
             var url = "";
             if (suffix) url = this.url + suffix;
             else
               url =
                 this.url +
-                "keluarga_miskin/" +
+                "penduduk/" +
                 this.kode +
-                "/list?status_kesejahteraan=" +
-                this.statusKesejahteraanSelected;
+                "/list?status_stunting=" +
+                this.statusStuntingSelected;
             axios.get(url).then((d) => {
-              this.keluarga = d.data.datas;
+              this.penduduk = d.data.datas;
+              console.log(this.penduduk);
             });
-          },
-          getLokasi(lat, lng, nama) {
-            if (this.markerMap) this.map.removeLayer(this.markerMap);
-            if (this.tooltipMap) this.map.removeLayer(this.tooltipMap);
-            if (lat && lng) {
-              this.markerMap = L.marker([lat, lng]).addTo(this.map);
-              this.tooltipMap = L.tooltip([lat, lng], {
-                content: nama,
-                permanent: true,
-              }).addTo(this.map);
-              this.map.setView([lat, lng], 20);
-              this.$refs["petaKemiskinan"].scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-                inline: "start",
-              });
-            } else this.map.setView([-2.990934, 104.756554], 7);
           },
           loadJS() {
             const pluginsjs = document.createElement("script");
@@ -888,10 +817,18 @@
           },
         },
         mounted() {
-          this.getStatusKesejahteraanKeluarga();
-          this.getKeluarga();
-          this.createMap();
+          this.getKategori().then(() => this.getPenduduk());
           this.loadJS();
+        },
+        watch: {
+          statusStuntingSelected() {
+            this.getPenduduk();
+            this.$refs["tabelStunting"].scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+              inline: "start",
+            });
+          },
         },
       }).mount("#app");
     </script>
