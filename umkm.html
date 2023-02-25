@@ -342,9 +342,9 @@
                     <a href="./kemiskinan.html">Kemiskinan</a>
                   </li>
                   <li>
-                    <a class="active" href="./stunting.html">Stunting</a>
+                    <a href="./stunting.html">Stunting</a>
                   </li>
-                  <li><a href="./umkm.html">UMKM</a></li>
+                  <li><a class="active" href="./umkm.html">UMKM</a></li>
                   <li><a href="#">Peta Tematik</a></li>
                 </ul>
               </div>
@@ -357,188 +357,77 @@
         <div class="container py-6 py-md-8">
           <div class="row text-center">
             <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-              <h3 class="display-4 mb-2 px-xl-10">Penduduk Stunting</h3>
+              <h3 class="display-4 mb-2 px-xl-10">
+                Usaha Mikro Kecil Menengah
+              </h3>
               <p>
-                <b><i>Stunting</i></b> adalah gangguan pertumbuhan dan
-                perkembangan anak akibat kekurangan gizi kronis dan infeksi
-                berulang, yang ditandai dengan panjang atau tinggi badannya
-                berada di bawah standar
+                <b>Usaha mikro kecil menengah</b> adalah istilah umum dalam
+                dunia ekonomi yang merujuk kepada usaha ekonomi produktif yang
+                dimiliki perorangan maupun badan usaha sesuai dengan kriteria
+                yang ditetapkan oleh Undang-undang No. 20 tahun 2008.
+                <b>UMKM</b>
+                dapat berarti bisnis yang dijalankan individu, rumah tangga,
+                atau badan usaha ukuran kecil.
               </p>
+              <hr class="mt-2 mb-6" />
             </div>
             <!-- /column -->
           </div>
           <!-- /.row -->
-          <div class="position-relative mb-14 mb-md-17">
-            <div
-              class="shape rounded-circle bg-soft-primary rellax w-16 h-16"
-              data-rellax-speed="1"
-              style="bottom: -0.5rem; right: -2.5rem; z-index: 0"
-            ></div>
-            <div
-              class="shape bg-dot primary rellax w-16 h-17"
-              data-rellax-speed="1"
-              style="top: -0.5rem; left: -2.5rem; z-index: 0"
-            ></div>
-            <div class="row gx-md-5 gy-5 text-center">
-              <div class="col-md-6 col-xl-4">
-                <div class="card">
-                  <div class="card-body">
-                    <div
-                      class="icon btn btn-circle btn-lg btn-primary disabled mb-3"
-                    >
-                      <i class="uil uil-phone-volume"></i>
+          <div
+            class="row gx-lg-12 gx-xl-16 gy-4 text-center align-items-center"
+          >
+            <div class="col-12" v-for="u in umkm.data">
+              <div class="card">
+                <div class="card-body">
+                  <h2 class="display-4 mb-3">{{ u.nama_umkm }}</h2>
+                  <p class="lead fs-md">
+                    Bergerak di Bidang {{ nameKategori(u.kategori_umkm,
+                    "lap_usaha") }}
+                  </p>
+                  <p class="d-flex justify-content-center mb-1">
+                    <span v-html="u.deskripsi"></span>
+                  </p>
+                  <div
+                    class="d-flex flex-row justify-content-center align-items-center"
+                  >
+                    <div>
+                      <img
+                        src="./assets/img/icons/lineal/user.svg"
+                        class="icon-svg icon-svg-xs me-4"
+                        alt="pemilik"
+                      />
                     </div>
-                    <h4>Stunting</h4>
-                    <h1 class="display-1 mb-2">100</h1>
-                    <a
-                      class="more hover link-primary"
-                      @click="statusStuntingSelected = 1"
-                      >Lihat</a
-                    >
-                  </div>
-                  <!--/.card-body -->
-                </div>
-                <!--/.card -->
-              </div>
-              <!--/column -->
-              <div class="col-md-6 col-xl-4">
-                <div class="card">
-                  <div class="card-body">
-                    <div
-                      class="icon btn btn-circle btn-lg btn-primary disabled mb-3"
-                    >
-                      <i class="uil uil-shield-exclamation"></i>
+                    <div>
+                      <h4>{{ u.nama_pemilik }}</h4>
                     </div>
-                    <h4>Potensi Stunting</h4>
-                    <h1 class="display-1 mb-2">50</h1>
-                    <a
-                      class="more hover link-primary"
-                      @click="statusStuntingSelected = 2"
-                      >Lihat</a
-                    >
                   </div>
-                  <!--/.card-body -->
                 </div>
-                <!--/.card -->
               </div>
-              <!--/column -->
-              <div class="col-md-6 col-xl-4">
-                <div class="card">
-                  <div class="card-body">
-                    <div
-                      class="icon btn btn-circle btn-lg btn-primary disabled mb-3"
-                    >
-                      <i class="uil uil-laptop-cloud"></i>
-                    </div>
-                    <h4>Tidak Stunting</h4>
-                    <h1 class="display-1 mb-2">1500</h1>
-                    <a
-                      class="more hover link-primary"
-                      @click="statusStuntingSelected = 0"
-                      >Lihat</a
-                    >
-                  </div>
-                  <!--/.card-body -->
-                </div>
-                <!--/.card -->
-              </div>
-              <!--/column -->
             </div>
-            <!--/.row -->
-            <hr class="my-6" />
-            <h3 class="display-4 mb-6 text-center">Penduduk</h3>
-            <div class="row">
-              <div class="col-12">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-12 mb-2">
-                        <div class="table-responsive" ref="tabelStunting">
-                          <table class="table table-striped">
-                            <thead>
-                              <tr>
-                                <th>NIK</th>
-                                <th>No KK</th>
-                                <th>Nama Lengkap</th>
-                                <th>Jenis Kelamin</th>
-                                <th>Tempat Lahir</th>
-                                <th>Tanggal Lahir</th>
-                                <th>Umur</th>
-                                <th>Pendidikan Terakhir</th>
-                                <th>Status Pekerjaan</th>
-                                <th>Pekerjaan</th>
-                                <th>Jenis Pekerjaan</th>
-                                <th>Nama SLS</th>
-                                <th>Alamat</th>
-                                <th>Status Stunting</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr v-for="p in penduduk.data">
-                                <td>{{ p.nik }}</td>
-                                <td>{{ p.no_kk }}</td>
-                                <td>{{ p.nama_lengkap }}</td>
-                                <td>
-                                  {{ nameKategori(p.jenis_kelamin,
-                                  "jenis_kelamin") }}
-                                </td>
-                                <td>{{ p.tempat_lahir }}</td>
-                                <td>{{ p.tanggal_lahir }}</td>
-                                <td>{{ p.umur }}</td>
-                                <td>
-                                  {{ nameKategori(p.pendidikan_terakhir,
-                                  "pendidikan") }}
-                                </td>
-                                <td>
-                                  {{ p.status_pekerjaan == 1 ? "Bekerja" :
-                                  "Tidak Bekerja" }}
-                                </td>
-                                <td>{{ p.pekerjaan }}</td>
-                                <td>
-                                  {{ nameKategori(p.jenis_pekerjaan,
-                                  "lap_usaha") }}
-                                </td>
-                                <td>{{ p.nama_sls }}</td>
-                                <td>{{ p.alamat }}</td>
-                                <td>
-                                  {{ nameKategori(p.status_stunting, "stunting")
-                                  }}
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                      <div class="col-12 d-flex justify-content-center">
-                        <div class="table-responsive">
-                          <nav aria-label="pagination penduduk">
-                            <ul class="pagination">
-                              <li
-                                class="page-item"
-                                :class="{ disabled: l.active || !l.url }"
-                                v-for="l in penduduk.links"
-                              >
-                                <a class="page-link" @click="getPenduduk(l.url)"
-                                  ><span
-                                    v-html="l.label.replace('Previous', '').replace('Next', '')"
-                                  ></span
-                                ></a>
-                              </li>
-                            </ul>
-                          </nav>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!--/.card-body -->
-                </div>
-                <!--/.card -->
+            <!--/column -->
+            <div class="col-12 d-flex justify-content-center">
+              <div class="table-responsive">
+                <nav aria-label="pagination umkm">
+                  <ul class="pagination">
+                    <li
+                      class="page-item"
+                      :class="{ disabled: l.active || !l.url }"
+                      v-for="l in umkm.links"
+                    >
+                      <a class="page-link" @click="getUMKM(l.url)"
+                        ><span
+                          v-html="l.label.replace('Previous', '').replace('Next', '')"
+                        ></span
+                      ></a>
+                    </li>
+                  </ul>
+                </nav>
               </div>
-              <!--/column -->
             </div>
-            <!--/.row -->
+            <!--/column -->
           </div>
-          <!-- /.position-relative -->
+          <!--/.row -->
         </div>
         <!-- /.container -->
       </section>
@@ -771,8 +660,7 @@
             url: "https://descan.bpssumsel.com/api/",
             kode: "1601052001",
             kategori: "",
-            penduduk: "",
-            statusStuntingSelected: "",
+            umkm: "",
           };
         },
         methods: {
@@ -791,19 +679,14 @@
             if (kategoriGetKode) return kategoriGetKode.name;
             else return "";
           },
-          getPenduduk(suffix) {
-            this.penduduk = "";
+          getUMKM(suffix) {
+            this.umkm = "";
             var url = "";
             if (suffix) url = this.url + suffix;
-            else
-              url =
-                this.url +
-                "penduduk/" +
-                this.kode +
-                "/list?status_stunting=" +
-                this.statusStuntingSelected;
+            else url = this.url + "umkm/" + this.kode + "/list";
             axios.get(url).then((d) => {
-              this.penduduk = d.data.datas;
+              this.umkm = d.data.datas;
+              console.log(this.umkm);
             });
           },
           loadJS() {
@@ -816,18 +699,8 @@
           },
         },
         mounted() {
-          this.getKategori().then(() => this.getPenduduk());
+          this.getKategori().then(() => this.getUMKM());
           this.loadJS();
-        },
-        watch: {
-          statusStuntingSelected() {
-            this.getPenduduk();
-            this.$refs["tabelStunting"].scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-              inline: "start",
-            });
-          },
         },
       }).mount("#app");
     </script>
