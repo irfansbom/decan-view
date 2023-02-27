@@ -353,7 +353,7 @@
         </div>
       </section>
 
-      <section class="wrapper bg-light">
+      <section class="wrapper bg-light" v-if="show">
         <div class="container py-6 py-md-8">
           <div class="row text-center">
             <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
@@ -428,6 +428,13 @@
             <!--/column -->
           </div>
           <!--/.row -->
+        </div>
+        <!-- /.container -->
+      </section>
+      <!-- /section -->
+      <section class="wrapper bg-light" v-else>
+        <div class="container py-6 py-md-8">
+          <h3>Belum Ada Data</h3>
         </div>
         <!-- /.container -->
       </section>
@@ -615,6 +622,7 @@
             kode: "1601052001",
             kategori: "",
             umkm: "",
+            show: false,
           };
         },
         methods: {
@@ -640,7 +648,7 @@
             else url = this.url + "umkm/" + this.kode + "/list";
             axios.get(url).then((d) => {
               this.umkm = d.data.datas;
-              console.log(this.umkm);
+              this.show = this.umkm.data.length != 0 ? true : false;
             });
           },
           loadJS() {

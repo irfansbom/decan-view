@@ -353,7 +353,7 @@
         </div>
       </section>
 
-      <section class="wrapper bg-light">
+      <section class="wrapper bg-light" v-if="show">
         <div class="container py-6 py-md-8">
           <div class="row text-center">
             <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
@@ -543,6 +543,13 @@
         <!-- /.container -->
       </section>
       <!-- /section -->
+      <section class="wrapper bg-light" v-else>
+        <div class="container py-6 py-md-8">
+          <h3>Belum Ada Data</h3>
+        </div>
+        <!-- /.container -->
+      </section>
+      <!-- /section -->
     </div>
     <footer
       class="bg-dark text-inverse"
@@ -727,6 +734,7 @@
             kategori: "",
             penduduk: "",
             statusStuntingSelected: "",
+            show: false,
           };
         },
         methods: {
@@ -758,6 +766,7 @@
                 this.statusStuntingSelected;
             axios.get(url).then((d) => {
               this.penduduk = d.data.datas;
+              this.show = this.penduduk.data.length != 0 ? true : false;
             });
           },
           loadJS() {
