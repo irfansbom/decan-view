@@ -1,427 +1,635 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="An impressive and flawless site template that includes various UI elements and countless features, attractive ready-made blocks and rich pages, basically everything you need to create a unique and professional website."
+    />
+    <meta
+      name="keywords"
+      content="bootstrap 5, business, corporate, creative, gulp, marketing, minimal, modern, multipurpose, one page, responsive, saas, sass, seo, startup, html5 template, site template"
+    />
+    <meta name="author" content="elemis" />
+    <title>Desa Bumi Sriwijaya</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    />
+    <link rel="shortcut icon" href="./assets/logo/logo.png" />
+    <link rel="stylesheet" href="./assets/css/plugins.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-    content="An impressive and flawless site template that includes various UI elements and countless features, attractive ready-made blocks and rich pages, basically everything you need to create a unique and professional website." />
-  <meta name="keywords"
-    content="bootstrap 5, business, corporate, creative, gulp, marketing, minimal, modern, multipurpose, one page, responsive, saas, sass, seo, startup, html5 template, site template" />
-  <meta name="author" content="elemis" />
-  <title>Desa Bumi Sriwijaya</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
-  <link rel="shortcut icon" href="./assets/logo/logo.png" />
-  <link rel="stylesheet" href="./assets/css/plugins.css" />
-  <link rel="stylesheet" href="./assets/css/style.css" />
-</head>
-
-<body>
-  <div class="content-wrapper" id="app">
-    <header class="wrapper bg-soft-primary">
-      <nav class="navbar navbar-expand-lg center-logo bg-image position-absolute navbar-dark"
-        data-image-src="./assets/img/photos/bg2.jpg">
-        <div class="container justify-content-between align-items-center mx-1" style="max-width: 100%">
-          <div class="d-flex flex-row w-100 justify-content-between align-items-center d-lg-none">
-            <div class="navbar-brand py-2">
-              <a href="./index.html">
-                <img class="logo-dark" src="./assets/logo/logofont.png" srcset="./assets/logo/logofont.png 8x" alt="" />
-                <img class="logo-light" src="./assets/logo/logofont.png" srcset="./assets/logo/logofont.png 8x"
-                  alt="" />
-              </a>
-            </div>
-
-            <div class="navbar-other ms-auto">
-              <ul class="navbar-nav flex-row align-items-center">
-                <li class="nav-item">
-                  <nav class="nav social social-white justify-content-end text-end">
-                    <a href="https://www.facebook.com/people/Bps-Provinsi-Sumatera-Selatan/100015484759318/"
-                      target="_blank"><i class="uil uil-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/bpssumsel/?hl=en" target="_blank"><i
-                        class="uil uil-instagram"></i></a>
-                    <a href="https://www.youtube.com/channel/UC-9WQN-5cNTVTGDF8Rkiu6A" target="_blank"><i
-                        class="uil uil-youtube"></i></a>
-                  </nav>
-                </li>
-                <li class="nav-item d-lg-none">
-                  <button class="hamburger offcanvas-nav-btn">
-                    <span></span>
-                  </button>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="navbar-collapse-wrapper d-flex flex-row align-items-center w-100">
-            <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
-              <div class="navbar-brand px-2">
+  <body>
+    <div class="content-wrapper" id="app">
+      <header class="wrapper bg-soft-primary">
+        <nav
+          class="navbar navbar-expand-lg center-logo bg-image position-absolute navbar-dark"
+          data-image-src="./assets/img/photos/bg2.jpg"
+        >
+          <div
+            class="container justify-content-between align-items-center mx-1"
+            style="max-width: 100%"
+          >
+            <div
+              class="d-flex flex-row w-100 justify-content-between align-items-center d-lg-none"
+            >
+              <div class="navbar-brand py-2">
                 <a href="./index.html">
-                  <img src="./assets/logo/logofont.png" srcset="./assets/logo/logofont.png 8x" alt="" />
+                  <img
+                    class="logo-dark"
+                    src="./assets/logo/logofont.png"
+                    srcset="./assets/logo/logofont.png 8x"
+                    alt=""
+                  />
+                  <img
+                    class="logo-light"
+                    src="./assets/logo/logofont.png"
+                    srcset="./assets/logo/logofont.png 8x"
+                    alt=""
+                  />
                 </a>
               </div>
 
-              <div class="w-100 order-1 order-lg-0 d-lg-flex offcanvas-body">
-                <ul class="navbar-nav">
-                  <li class="nav-item dropdown dropdown-mega">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Menu</a>
-                    <ul class="dropdown-menu mega-menu mega-menu-dark mega-menu-img">
-                      <li class="mega-menu-content">
-                        <ul class="row row-cols-1 row-cols-lg-5 gx-0 gx-lg-4 gy-lg-2 list-unstyled">
-                          <li class="col"><a class="dropdown-item" href="#">
-                              <figure class="rounded lift d-none d-lg-block"><img src="./assets/img/menu/monograph.png"
-                                  srcset="./assets/img/menu/monograph.png 2x" alt=""></figure>
-                              <span class="d-lg-none">Monograph</span>
-                            </a></li>
-                          <li class="col"><a class="dropdown-item" href="#">
-                              <figure class="rounded lift d-none d-lg-block"><img src="./assets/img/menu/kemiskinan.png"
-                                  srcset="./assets/img/menu/kemiskinan.png 2x" alt=""></figure>
-                              <span class="d-lg-none">Kemiskinan</span>
-                            </a></li>
-                          <li class="col"><a class="dropdown-item" href="#">
-                              <figure class="rounded lift d-none d-lg-block"><img src="./assets/img/menu/stunting.png"
-                                  srcset="./assets/img/menu/stunting.png 2x" alt=""></figure>
-                              <span class="d-lg-none">Stunting</span>
-                            </a></li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </li>
+              <div class="navbar-other ms-auto">
+                <ul class="navbar-nav flex-row align-items-center">
                   <li class="nav-item">
-                    <a class="nav-link" href="https://sumsel.bps.go.id" target="_blank">Official Web</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="w-100 order-3 order-lg-2 d-lg-flex offcanvas-body text-end">
-                <ul class="navbar-nav ms-auto me-0">
-                  <li>
-                    <aside class="col-lg-12 sidebar">
-                      <form class="search-form">
-                        <div class="form-floating mb-0" style="border-color: white">
-                          <input id="search-form" type="text" class="form-control text-white" placeholder="Search"
-                            style="
-                                background-color: transparent;
-                                border-color: #ffffff81;
-                              " />
-                          <label for="search-form" class="text-white">Search</label>
-                        </div>
-                      </form>
-                    </aside>
-                  </li>
-                  <li class="text-end d-none d-lg-block navbar-other">
-                    <nav class="nav social social-white mt-2">
-                      <a href="https://www.facebook.com/people/Bps-Provinsi-Sumatera-Selatan/100015484759318/"
-                        target="_blank"><i class="uil uil-facebook-f"></i></a>
-                      <a href="https://www.instagram.com/bpssumsel/?hl=en" target="_blank"><i
-                          class="uil uil-instagram"></i></a>
-                      <a href="https://www.youtube.com/channel/UC-9WQN-5cNTVTGDF8Rkiu6A" target="_blank"><i
-                          class="uil uil-youtube"></i></a>
+                    <nav
+                      class="nav social social-white justify-content-end text-end"
+                    >
+                      <a
+                        href="https://www.facebook.com/people/Bps-Provinsi-Sumatera-Selatan/100015484759318/"
+                        target="_blank"
+                        ><i class="uil uil-facebook-f"></i
+                      ></a>
+                      <a
+                        href="https://www.instagram.com/bpssumsel/?hl=en"
+                        target="_blank"
+                        ><i class="uil uil-instagram"></i
+                      ></a>
+                      <a
+                        href="https://www.youtube.com/channel/UC-9WQN-5cNTVTGDF8Rkiu6A"
+                        target="_blank"
+                        ><i class="uil uil-youtube"></i
+                      ></a>
                     </nav>
                   </li>
+                  <li class="nav-item d-lg-none">
+                    <button class="hamburger offcanvas-nav-btn">
+                      <span></span>
+                    </button>
+                  </li>
                 </ul>
               </div>
-              <div class="offcanvas-body order-4 mt-auto">
-                <div class="d-lg-none mt-auto pt-6 pb-6 order-4">
-                  <a href="mailto:first.last@email.com" class="link-inverse">info@email.com</a>
-                  <br />
-                  00 (123) 456 78 90 <br />
-                  <nav class="nav social social-white mt-4">
-                    <a href="https://www.facebook.com/people/Bps-Provinsi-Sumatera-Selatan/100015484759318/"
-                      target="_blank"><i class="uil uil-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/bpssumsel/?hl=en" target="_blank"><i
-                        class="uil uil-instagram"></i></a>
-                    <a href="https://www.youtube.com/channel/UC-9WQN-5cNTVTGDF8Rkiu6A" target="_blank"><i
-                        class="uil uil-youtube"></i></a>
-                  </nav>
+            </div>
+
+            <div
+              class="navbar-collapse-wrapper d-flex flex-row align-items-center w-100"
+            >
+              <div
+                class="navbar-collapse offcanvas offcanvas-nav offcanvas-start"
+              >
+                <div class="navbar-brand px-2">
+                  <a href="./index.html">
+                    <img
+                      src="./assets/logo/logofont.png"
+                      srcset="./assets/logo/logofont.png 8x"
+                      alt=""
+                    />
+                  </a>
+                </div>
+
+                <div class="w-100 order-1 order-lg-0 d-lg-flex offcanvas-body">
+                  <ul class="navbar-nav">
+                    <li class="nav-item dropdown dropdown-mega">
+                      <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        data-bs-toggle="dropdown"
+                        >Menu</a
+                      >
+                      <ul
+                        class="dropdown-menu mega-menu mega-menu-dark mega-menu-img"
+                      >
+                        <li class="mega-menu-content">
+                          <ul
+                            class="row row-cols-1 row-cols-lg-5 gx-0 gx-lg-4 gy-lg-2 list-unstyled"
+                          >
+                            <li class="col">
+                              <a class="dropdown-item" href="#">
+                                <figure class="rounded lift d-none d-lg-block">
+                                  <img
+                                    src="./assets/img/menu/monograph.png"
+                                    srcset="./assets/img/menu/monograph.png 2x"
+                                    alt=""
+                                  />
+                                </figure>
+                                <span class="d-lg-none">Monograph</span>
+                              </a>
+                            </li>
+                            <li class="col">
+                              <a class="dropdown-item" href="#">
+                                <figure class="rounded lift d-none d-lg-block">
+                                  <img
+                                    src="./assets/img/menu/kemiskinan.png"
+                                    srcset="./assets/img/menu/kemiskinan.png 2x"
+                                    alt=""
+                                  />
+                                </figure>
+                                <span class="d-lg-none">Kemiskinan</span>
+                              </a>
+                            </li>
+                            <li class="col">
+                              <a class="dropdown-item" href="#">
+                                <figure class="rounded lift d-none d-lg-block">
+                                  <img
+                                    src="./assets/img/menu/stunting.png"
+                                    srcset="./assets/img/menu/stunting.png 2x"
+                                    alt=""
+                                  />
+                                </figure>
+                                <span class="d-lg-none">Stunting</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        class="nav-link"
+                        href="https://sumsel.bps.go.id"
+                        target="_blank"
+                        >Official Web</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div
+                  class="w-100 order-3 order-lg-2 d-lg-flex offcanvas-body text-end"
+                >
+                  <ul class="navbar-nav ms-auto me-0">
+                    <li>
+                      <aside class="col-lg-12 sidebar">
+                        <form class="search-form">
+                          <div
+                            class="form-floating mb-0"
+                            style="border-color: white"
+                          >
+                            <input
+                              id="search-form"
+                              type="text"
+                              class="form-control text-white"
+                              placeholder="Search"
+                              style="
+                                background-color: transparent;
+                                border-color: #ffffff81;
+                              "
+                            />
+                            <label for="search-form" class="text-white"
+                              >Search</label
+                            >
+                          </div>
+                        </form>
+                      </aside>
+                    </li>
+                    <li class="text-end d-none d-lg-block navbar-other">
+                      <nav class="nav social social-white mt-2">
+                        <a
+                          href="https://www.facebook.com/people/Bps-Provinsi-Sumatera-Selatan/100015484759318/"
+                          target="_blank"
+                          ><i class="uil uil-facebook-f"></i
+                        ></a>
+                        <a
+                          href="https://www.instagram.com/bpssumsel/?hl=en"
+                          target="_blank"
+                          ><i class="uil uil-instagram"></i
+                        ></a>
+                        <a
+                          href="https://www.youtube.com/channel/UC-9WQN-5cNTVTGDF8Rkiu6A"
+                          target="_blank"
+                          ><i class="uil uil-youtube"></i
+                        ></a>
+                      </nav>
+                    </li>
+                  </ul>
+                </div>
+                <div class="offcanvas-body order-4 mt-auto">
+                  <div class="d-lg-none mt-auto pt-6 pb-6 order-4">
+                    <a href="mailto:first.last@email.com" class="link-inverse"
+                      >info@email.com</a
+                    >
+                    <br />
+                    00 (123) 456 78 90 <br />
+                    <nav class="nav social social-white mt-4">
+                      <a
+                        href="https://www.facebook.com/people/Bps-Provinsi-Sumatera-Selatan/100015484759318/"
+                        target="_blank"
+                        ><i class="uil uil-facebook-f"></i
+                      ></a>
+                      <a
+                        href="https://www.instagram.com/bpssumsel/?hl=en"
+                        target="_blank"
+                        ><i class="uil uil-instagram"></i
+                      ></a>
+                      <a
+                        href="https://www.youtube.com/channel/UC-9WQN-5cNTVTGDF8Rkiu6A"
+                        target="_blank"
+                        ><i class="uil uil-youtube"></i
+                      ></a>
+                    </nav>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </nav>
-    </header>
+        </nav>
+      </header>
 
-    <section class="wrapper image-wrapper bg-image bg-overlay bg-overlay-900 bg-overlay-900"
-      data-image-src="./assets/img/desa/desa_1.jpg">
-      <div class="container pt-6 pt-md-15 pb-8">
-        <div class="row gx-lg-8 gy-8 mt-5 mt-md-12 mt-lg-0 mb-8 align-items-center">
-          <div class="col-lg-6 order-lg-2">
-            <div class="row gx-md-5 gy-5" data-cues="fadeIn" data-group="images">
-              <div class="col-md-6 text-center">
-                <figure class="rounded mx-4">
-                  <img src="./assets/prov-logo/prov_logo.png" srcset="./assets/prov-logo/prov_logo.png 2x" alt="" style="
+      <section
+        class="wrapper image-wrapper bg-image bg-overlay bg-overlay-900 bg-overlay-900"
+        data-image-src="./assets/img/desa/desa_1.jpg"
+      >
+        <div class="container pt-6 pt-md-15 pb-8">
+          <div
+            class="row gx-lg-8 gy-8 mt-5 mt-md-12 mt-lg-0 mb-8 align-items-center"
+          >
+            <div class="col-lg-6 order-lg-2">
+              <div
+                class="row gx-md-5 gy-5"
+                data-cues="fadeIn"
+                data-group="images"
+              >
+                <div class="col-md-6 text-center">
+                  <figure class="rounded mx-4">
+                    <img
+                      src="./assets/prov-logo/prov_logo.png"
+                      srcset="./assets/prov-logo/prov_logo.png 2x"
+                      alt=""
+                      style="
                         max-height: 300px;
                         max-width: 200px;
                         height: 100%;
                         width: 100%;
-                      " />
-                </figure>
-              </div>
-              <div class="col-md-6 text-center">
-                <figure class="rounded mx-4">
-                  <img src="./assets/kabs-logo/logo1601.png" srcset="./assets/kabs-logo/logo1601.png 2x" alt="" style="
+                      "
+                    />
+                  </figure>
+                </div>
+                <div class="col-md-6 text-center">
+                  <figure class="rounded mx-4">
+                    <img
+                      src="./assets/kabs-logo/logo1601.png"
+                      srcset="./assets/kabs-logo/logo1601.png 2x"
+                      alt=""
+                      style="
                         max-height: 300px;
                         max-width: 200px;
                         height: 100%;
                         width: 100%;
-                      " />
-                </figure>
-              </div>
-              <!-- <div class="col-md-12 text-center">
+                      "
+                    />
+                  </figure>
+                </div>
+                <!-- <div class="col-md-12 text-center">
                   <figure class="rounded"><img src="./assets/img/foto_pengurus/ronaldo.jpeg"
                       srcset="./assets/img/foto_pengurus/ronaldo.jpeg 2x" alt=""
                       style="max-height: 300px; max-width: 200px; height:100% ; width: 100%;"></figure>
                 </div> -->
+              </div>
             </div>
-          </div>
-          <div class="col-lg-6 text-white">
-            <div data-cues="slideInDown" data-group="page-title" data-delay="600">
-              <h1 class="display-1 text-white mb-4">
-                Desa/Kelurahan <br />
-                <span class="typer text-sky" data-delay="100" data-words="Bandar Jaya">
-                </span>
-                <span class="cursor text-sky" data-owner="typer"></span>
-              </h1>
-              <p class="lead fs-24 lh-sm text-white mb-7">
-                Desa Penghasil Karet Terbanyak di Kabupaten Ogan Komering Ulu
-              </p>
-              <div>
-                <a class="btn btn-lg btn-sky rounded" id="btn_lanjutkan">Lanjutkan</a>
+            <div class="col-lg-6 text-white">
+              <div
+                data-cues="slideInDown"
+                data-group="page-title"
+                data-delay="600"
+              >
+                <h1 class="display-1 text-white mb-4">
+                  Desa/Kelurahan <br />
+                  <span
+                    class="typer text-sky"
+                    data-delay="100"
+                    data-words="Bandar Jaya"
+                  >
+                  </span>
+                  <span class="cursor text-sky" data-owner="typer"></span>
+                </h1>
+                <p class="lead fs-24 lh-sm text-white mb-7">
+                  Desa Penghasil Karet Terbanyak di Kabupaten Ogan Komering Ulu
+                </p>
+                <div>
+                  <a class="btn btn-lg btn-sky rounded" id="btn_lanjutkan"
+                    >Lanjutkan</a
+                  >
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="wrapper bg-light wrapper-border">
-      <div class="container pt-6">
-        <div class="row gx-lg-8 gx-xl-12 gy-4 gy-lg-0">
-          <div class="col-lg-8 align-self-center">
-            <div class="blog-filter filter">
-              <ul>
+      <section class="wrapper bg-light wrapper-border">
+        <div class="container pt-6">
+          <div class="row gx-lg-8 gx-xl-12 gy-4 gy-lg-0">
+            <div class="col-lg-8 align-self-center">
+              <div class="blog-filter filter">
+                <ul>
+                  <li>
+                    <a href="./monograph.html">Monograph</a>
+                  </li>
+                  <li>
+                    <a href="./kemiskinan.html">Kemiskinan</a>
+                  </li>
+                  <li>
+                    <a class="active" href="./stunting.html">Stunting</a>
+                  </li>
+                  <li><a href="./umkm.html">UMKM</a></li>
+                  <li><a href="#">Peta Tematik</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrapper bg-light">
+        <div class="container py-6 py-md-8">
+          <div class="row text-center">
+            <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+              <h3 class="display-4 mb-2 px-xl-10">Penduduk Stunting</h3>
+              <p>
+                <b><i>Stunting</i></b> adalah gangguan pertumbuhan dan
+                perkembangan anak akibat kekurangan gizi kronis dan infeksi
+                berulang, yang ditandai dengan panjang atau tinggi badannya
+                berada di bawah standar
+              </p>
+            </div>
+            <!-- /column -->
+          </div>
+          <!-- /.row -->
+          <div class="position-relative mb-14 mb-md-17">
+            <div
+              class="shape rounded-circle bg-soft-primary rellax w-16 h-16"
+              data-rellax-speed="1"
+              style="top: -0.5rem; right: -2.5rem; z-index: 0"
+            ></div>
+            <div
+              class="shape bg-dot primary rellax w-16 h-17"
+              data-rellax-speed="1"
+              style="top: -0.5rem; left: -2.5rem; z-index: 0"
+            ></div>
+            <div class="row gx-md-5 gy-5 text-center">
+              <div class="col-md-6 col-xl-4">
+                <div class="card">
+                  <div class="card-body">
+                    <div
+                      class="icon btn btn-circle btn-lg btn-primary disabled mb-3"
+                    >
+                      <i class="uil uil-user-minus"></i>
+                    </div>
+                    <h4>Stunting</h4>
+                    <h1 class="display-1 mb-2">100</h1>
+                    <a
+                      class="more hover link-primary"
+                      @click="statusStuntingSelected = 1"
+                      >Lihat</a
+                    >
+                  </div>
+                  <!--/.card-body -->
+                </div>
+                <!--/.card -->
+              </div>
+              <!--/column -->
+              <div class="col-md-6 col-xl-4">
+                <div class="card">
+                  <div class="card-body">
+                    <div
+                      class="icon btn btn-circle btn-lg btn-primary disabled mb-3"
+                    >
+                      <i class="uil uil-user-exclamation"></i>
+                    </div>
+                    <h4>Potensi Stunting</h4>
+                    <h1 class="display-1 mb-2">50</h1>
+                    <a
+                      class="more hover link-primary"
+                      @click="statusStuntingSelected = 2"
+                      >Lihat</a
+                    >
+                  </div>
+                  <!--/.card-body -->
+                </div>
+                <!--/.card -->
+              </div>
+              <!--/column -->
+              <div class="col-md-6 col-xl-4">
+                <div class="card">
+                  <div class="card-body">
+                    <div
+                      class="icon btn btn-circle btn-lg btn-primary disabled mb-3"
+                    >
+                      <i class="uil uil-user-check"></i>
+                    </div>
+                    <h4>Tidak Stunting</h4>
+                    <h1 class="display-1 mb-2">1500</h1>
+                    <a
+                      class="more hover link-primary"
+                      @click="statusStuntingSelected = 0"
+                      >Lihat</a
+                    >
+                  </div>
+                  <!--/.card-body -->
+                </div>
+                <!--/.card -->
+              </div>
+              <!--/column -->
+            </div>
+            <!--/.row -->
+            <hr class="my-6" />
+            <h3 class="display-4 mb-6 text-center">Penduduk</h3>
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12 mb-2">
+                        <div class="table-responsive" ref="tabelStunting">
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>NIK</th>
+                                <th>No KK</th>
+                                <th>Nama Lengkap</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Tempat Lahir</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Umur</th>
+                                <th>Pendidikan Terakhir</th>
+                                <th>Status Pekerjaan</th>
+                                <th>Pekerjaan</th>
+                                <th>Jenis Pekerjaan</th>
+                                <th>Nama SLS</th>
+                                <th>Alamat</th>
+                                <th>Status Stunting</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr v-for="p in penduduk.data">
+                                <td>{{ p.nik }}</td>
+                                <td>{{ p.no_kk }}</td>
+                                <td>{{ p.nama_lengkap }}</td>
+                                <td>
+                                  {{ nameKategori(p.jenis_kelamin,
+                                  "jenis_kelamin") }}
+                                </td>
+                                <td>{{ p.tempat_lahir }}</td>
+                                <td>{{ p.tanggal_lahir }}</td>
+                                <td>{{ p.umur }}</td>
+                                <td>
+                                  {{ nameKategori(p.pendidikan_terakhir,
+                                  "pendidikan") }}
+                                </td>
+                                <td>
+                                  {{ p.status_pekerjaan == 1 ? "Bekerja" :
+                                  "Tidak Bekerja" }}
+                                </td>
+                                <td>{{ p.pekerjaan }}</td>
+                                <td>
+                                  {{ nameKategori(p.jenis_pekerjaan,
+                                  "lap_usaha") }}
+                                </td>
+                                <td>{{ p.nama_sls }}</td>
+                                <td>{{ p.alamat }}</td>
+                                <td>
+                                  {{ nameKategori(p.status_stunting, "stunting")
+                                  }}
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="col-12 d-flex justify-content-center">
+                        <div class="table-responsive">
+                          <nav aria-label="pagination penduduk">
+                            <ul class="pagination">
+                              <li
+                                class="page-item"
+                                :class="{ disabled: l.active || !l.url }"
+                                v-for="l in penduduk.links"
+                              >
+                                <a class="page-link" @click="getPenduduk(l.url)"
+                                  ><span
+                                    v-html="l.label.replace('Previous', '').replace('Next', '')"
+                                  ></span
+                                ></a>
+                              </li>
+                            </ul>
+                          </nav>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--/.card-body -->
+                </div>
+                <!--/.card -->
+              </div>
+              <!--/column -->
+            </div>
+            <!--/.row -->
+          </div>
+          <!-- /.position-relative -->
+        </div>
+        <!-- /.container -->
+      </section>
+      <!-- /section -->
+    </div>
+    <footer
+      class="bg-dark text-inverse"
+      data-image-src="./assets/img/photos/bg2.jpg"
+    >
+      <div
+        class="container mx-10 pb-7 pb-md-7 pt-3 mt-3"
+        style="max-width: 92%"
+      >
+        <div class="row gy-6 gy-lg-0">
+          <div class="col-md-4 col-lg-">
+            <div class="widget">
+              <img
+                class="mb-4"
+                src="./assets/logo/logo.png"
+                srcset="./assets/logo/logo.png 8x"
+                alt=""
+              />
+              <p class="mb-4">
+                © 2023 Developer 1600<br class="d-none d-lg-block" />Hak Cipta
+              </p>
+              <nav class="nav social social-white">
+                <a
+                  href="https://www.facebook.com/people/Bps-Provinsi-Sumatera-Selatan/100015484759318/"
+                  target="_blank"
+                  ><i class="uil uil-facebook-f"></i
+                ></a>
+                <a
+                  href="https://www.instagram.com/bpssumsel/?hl=en"
+                  target="_blank"
+                  ><i class="uil uil-instagram"></i
+                ></a>
+                <a
+                  href="https://www.youtube.com/channel/UC-9WQN-5cNTVTGDF8Rkiu6A"
+                  target="_blank"
+                  ><i class="uil uil-youtube"></i
+                ></a>
+              </nav>
+              <!-- /.social -->
+            </div>
+            <!-- /.widget -->
+          </div>
+
+          <div class="col-md-4 col-lg-4">
+            <div class="widget">
+              <h4 class="widget-title text-white mb-3">Hubungi Kami</h4>
+              <address class="pe-xl-15 pe-xxl-17">
+                Jl. Kapten Anwar Sastro No 1694 Palembang, Sumatera Selatan
+                30129
+              </address>
+              <a href="mailto:#">bps1600@bps.go.id</a><br />
+              Telp (0711) 351665, 318456
+            </div>
+            <!-- /.widget -->
+          </div>
+
+          <div class="col-md-4 col-lg-4">
+            <div class="widget">
+              <h4 class="widget-title text-white mb-3">Selengkapnya</h4>
+              <ul class="list-unstyled mb-0">
                 <li>
-                  <a href="./monograph.html">Monograph</a>
+                  <a href="https://sumsel.bps.go.id" target="_blank"
+                    >Official BPS SUMSEL</a
+                  >
                 </li>
                 <li>
-                  <a href="./kemiskinan.html">Kemiskinan</a>
+                  <a href="https://pstdigital.bpssumsel.com" target="_blank"
+                    >Konsultasi Online</a
+                  >
                 </li>
                 <li>
-                  <a class="active" href="./stunting.html">Stunting</a>
+                  <a href="https://sdgsforsumsel.bpssumsel.com" target="_blank"
+                    >SDG's For Sumsel</a
+                  >
                 </li>
-                <li><a href="./umkm.html">UMKM</a></li>
-                <li><a href="#">Peta Tematik</a></li>
+                <li>
+                  <a href="https://zi.bpssumsel.com" target="_blank"
+                    >Zona Integritas</a
+                  >
+                </li>
+                <!-- <li><a href="#">Privacy Policy</a></li> -->
               </ul>
             </div>
+            <!-- /.widget -->
           </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="wrapper bg-light">
-      <div class="container py-6 py-md-8">
-        <div class="row text-center">
-          <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-            <h3 class="display-4 mb-2 px-xl-10">Penduduk Stunting</h3>
-            <p>
-              <b><i>Stunting</i></b> adalah gangguan pertumbuhan dan
-              perkembangan anak akibat kekurangan gizi kronis dan infeksi
-              berulang, yang ditandai dengan panjang atau tinggi badannya
-              berada di bawah standar
-            </p>
-          </div>
-          <!-- /column -->
-        </div>
-        <!-- /.row -->
-        <div class="position-relative mb-14 mb-md-17">
-          <div class="shape rounded-circle bg-soft-primary rellax w-16 h-16" data-rellax-speed="1"
-            style="bottom: -0.5rem; right: -2.5rem; z-index: 0"></div>
-          <div class="shape bg-dot primary rellax w-16 h-17" data-rellax-speed="1"
-            style="top: -0.5rem; left: -2.5rem; z-index: 0"></div>
-          <div class="row gx-md-5 gy-5 text-center">
-            <div class="col-md-6 col-xl-4">
-              <div class="card">
-                <div class="card-body">
-                  <div class="icon btn btn-circle btn-lg btn-primary disabled mb-3">
-                    <i class="uil uil-phone-volume"></i>
-                  </div>
-                  <h4>Stunting</h4>
-                  <h1 class="display-1 mb-2">100</h1>
-                  <a class="more hover link-primary" @click="statusStuntingSelected = 1">Lihat</a>
-                </div>
-                <!--/.card-body -->
-              </div>
-              <!--/.card -->
-            </div>
-            <!--/column -->
-            <div class="col-md-6 col-xl-4">
-              <div class="card">
-                <div class="card-body">
-                  <div class="icon btn btn-circle btn-lg btn-primary disabled mb-3">
-                    <i class="uil uil-shield-exclamation"></i>
-                  </div>
-                  <h4>Potensi Stunting</h4>
-                  <h1 class="display-1 mb-2">50</h1>
-                  <a class="more hover link-primary" @click="statusStuntingSelected = 2">Lihat</a>
-                </div>
-                <!--/.card-body -->
-              </div>
-              <!--/.card -->
-            </div>
-            <!--/column -->
-            <div class="col-md-6 col-xl-4">
-              <div class="card">
-                <div class="card-body">
-                  <div class="icon btn btn-circle btn-lg btn-primary disabled mb-3">
-                    <i class="uil uil-laptop-cloud"></i>
-                  </div>
-                  <h4>Tidak Stunting</h4>
-                  <h1 class="display-1 mb-2">1500</h1>
-                  <a class="more hover link-primary" @click="statusStuntingSelected = 0">Lihat</a>
-                </div>
-                <!--/.card-body -->
-              </div>
-              <!--/.card -->
-            </div>
-            <!--/column -->
-          </div>
-          <!--/.row -->
-          <hr class="my-6" />
-          <h3 class="display-4 mb-6 text-center">Penduduk</h3>
-          <div class="row">
-            <div class="col-12">
-              <div class="card">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-12 mb-2">
-                      <div class="table-responsive" ref="tabelStunting">
-                        <table class="table table-striped">
-                          <thead>
-                            <tr>
-                              <th>NIK</th>
-                              <th>No KK</th>
-                              <th>Nama Lengkap</th>
-                              <th>Jenis Kelamin</th>
-                              <th>Tempat Lahir</th>
-                              <th>Tanggal Lahir</th>
-                              <th>Umur</th>
-                              <th>Pendidikan Terakhir</th>
-                              <th>Status Pekerjaan</th>
-                              <th>Pekerjaan</th>
-                              <th>Jenis Pekerjaan</th>
-                              <th>Nama SLS</th>
-                              <th>Alamat</th>
-                              <th>Status Stunting</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr v-for="p in penduduk.data">
-                              <td>{{ p.nik }}</td>
-                              <td>{{ p.no_kk }}</td>
-                              <td>{{ p.nama_lengkap }}</td>
-                              <td>
-                                {{ nameKategori(p.jenis_kelamin,
-                                "jenis_kelamin") }}
-                              </td>
-                              <td>{{ p.tempat_lahir }}</td>
-                              <td>{{ p.tanggal_lahir }}</td>
-                              <td>{{ p.umur }}</td>
-                              <td>
-                                {{ nameKategori(p.pendidikan_terakhir,
-                                "pendidikan") }}
-                              </td>
-                              <td>
-                                {{ p.status_pekerjaan == 1 ? "Bekerja" :
-                                "Tidak Bekerja" }}
-                              </td>
-                              <td>{{ p.pekerjaan }}</td>
-                              <td>
-                                {{ nameKategori(p.jenis_pekerjaan,
-                                "lap_usaha") }}
-                              </td>
-                              <td>{{ p.nama_sls }}</td>
-                              <td>{{ p.alamat }}</td>
-                              <td>
-                                {{ nameKategori(p.status_stunting, "stunting")
-                                }}
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                    <div class="col-12 d-flex justify-content-center">
-                      <div class="table-responsive">
-                        <nav aria-label="pagination penduduk">
-                          <ul class="pagination">
-                            <li class="page-item" :class="{ disabled: l.active || !l.url }" v-for="l in penduduk.links">
-                              <a class="page-link" @click="getPenduduk(l.url)"><span
-                                  v-html="l.label.replace('Previous', '').replace('Next', '')"></span></a>
-                            </li>
-                          </ul>
-                        </nav>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!--/.card-body -->
-              </div>
-              <!--/.card -->
-            </div>
-            <!--/column -->
-          </div>
-          <!--/.row -->
-        </div>
-        <!-- /.position-relative -->
-      </div>
-      <!-- /.container -->
-    </section>
-    <!-- /section -->
-  </div>
-  <footer class="bg-dark  text-inverse" data-image-src="./assets/img/photos/bg2.jpg">
-    <div class="container mx-10 pb-7 pb-md-7 pt-3 mt-3" style="max-width:92%">
-
-      <div class="row gy-6 gy-lg-0">
-        <div class="col-md-4 col-lg-4">
-          <div class="widget">
-            <img class="mb-4" src="./assets/logo/logo.png" srcset="./assets/logo/logo.png 8x" alt="" />
-            <p class="mb-4">© 2023 Developer 1600<br class="d-none d-lg-block" />Hak Cipta</p>
-            <nav class="nav social social-white">
-              <a href="https://www.facebook.com/people/Bps-Provinsi-Sumatera-Selatan/100015484759318/"
-                target="_blank"><i class="uil uil-facebook-f"></i></a>
-              <a href="https://www.instagram.com/bpssumsel/?hl=en" target="_blank"><i class="uil uil-instagram"></i></a>
-              <a href="https://www.youtube.com/channel/UC-9WQN-5cNTVTGDF8Rkiu6A" target="_blank"><i
-                  class="uil uil-youtube"></i></a>
-            </nav>
-            <!-- /.social -->
-          </div>
-          <!-- /.widget -->
-        </div>
-
-        <div class="col-md-4 col-lg-4">
-          <div class="widget">
-            <h4 class="widget-title text-white mb-3">Hubungi Kami</h4>
-            <address class="pe-xl-15 pe-xxl-17">Jl. Kapten Anwar Sastro No 1694 Palembang, Sumatera Selatan 30129
-            </address>
-            <a href="mailto:#">bps1600@bps.go.id</a><br /> Telp (0711) 351665, 318456
-          </div>
-          <!-- /.widget -->
-        </div>
-
-        <div class="col-md-4 col-lg-4">
-          <div class="widget">
-            <h4 class="widget-title text-white mb-3">Selengkapnya</h4>
-            <ul class="list-unstyled  mb-0">
-              <li><a href="https://sumsel.bps.go.id" target="_blank">Official BPS SUMSEL</a></li>
-              <li><a href="https://pstdigital.bpssumsel.com" target="_blank">Konsultasi Online</a></li>
-              <li><a href="https://sdgsforsumsel.bpssumsel.com" target="_blank">SDG's For Sumsel</a></li>
-              <li><a href="https://zi.bpssumsel.com" target="_blank">Zona Integritas</a></li>
-              <!-- <li><a href="#">Privacy Policy</a></li> -->
-            </ul>
-          </div>
-          <!-- /.widget -->
-        </div>
-
-        <!-- <div class="col-md-12 col-lg-3">
+          <!-- <div class="col-md-12 col-lg-3">
             <div class="widget">
               <h4 class="widget-title text-white mb-3">Our Newsletter</h4>
               <p class="mb-5">Subscribe to our newsletter to get our news & deals delivered to you.</p>
@@ -450,125 +658,132 @@
               </div>
             </div>
           </div> -->
+        </div>
       </div>
+    </footer>
+    <div class="progress-wrap">
+      <svg
+        class="progress-circle svg-content"
+        width="100%"
+        height="100%"
+        viewBox="-1 -1 102 102"
+      >
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+      </svg>
     </div>
-  </footer>
-  <div class="progress-wrap">
-    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-      <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
-    </svg>
-  </div>
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/chart.js/dist/chart.umd.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.3.min.js"
-    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-  <script>
-    $("#btn_luas_wilayah").click(() => {
-      $("html, body").animate(
-        {
-          scrollTop: $("#section_luas_wilayah").offset().top,
-        },
-        1000
-      );
-    });
-    $("#btn_penduduk").click(() => {
-      $("html, body").animate(
-        {
-          scrollTop:
-            $("#section_penduduk").offset().top - $(".navbar").height(),
-        },
-        1000
-      );
-    });
-    $("#btn_faskes").click(() => {
-      $("html, body").animate(
-        {
-          scrollTop:
-            $("#section_faskes").offset().top - $(".navbar").height(),
-        },
-        1000
-      );
-    });
-    $("#btn_tempat_ibadah").click(() => {
-      $("html, body").animate(
-        {
-          scrollTop:
-            $("#section_tempat_ibadah").offset().top - $(".navbar").height(),
-        },
-        1000
-      );
-    });
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/chart.js/dist/chart.umd.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.min.js"
+      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $("#btn_luas_wilayah").click(() => {
+        $("html, body").animate(
+          {
+            scrollTop: $("#section_luas_wilayah").offset().top,
+          },
+          1000
+        );
+      });
+      $("#btn_penduduk").click(() => {
+        $("html, body").animate(
+          {
+            scrollTop:
+              $("#section_penduduk").offset().top - $(".navbar").height(),
+          },
+          1000
+        );
+      });
+      $("#btn_faskes").click(() => {
+        $("html, body").animate(
+          {
+            scrollTop:
+              $("#section_faskes").offset().top - $(".navbar").height(),
+          },
+          1000
+        );
+      });
+      $("#btn_tempat_ibadah").click(() => {
+        $("html, body").animate(
+          {
+            scrollTop:
+              $("#section_tempat_ibadah").offset().top - $(".navbar").height(),
+          },
+          1000
+        );
+      });
 
-    const { createApp } = Vue;
+      const { createApp } = Vue;
 
-    createApp({
-      data() {
-        return {
-          url: "https://descan.bpssumsel.com/api/",
-          kode: "1601052001",
-          kategori: "",
-          penduduk: "",
-          statusStuntingSelected: "",
-        };
-      },
-      methods: {
-        async getKategori() {
-          try {
-            let total = await axios.get(this.url + "kategori");
-            total = total.data.datas.total;
-            axios.get(this.url + "kategori?per_page=" + total).then((d) => {
-              this.kategori = d.data.datas.data;
+      createApp({
+        data() {
+          return {
+            url: "https://descan.bpssumsel.com/api/",
+            kode: "1601052001",
+            kategori: "",
+            penduduk: "",
+            statusStuntingSelected: "",
+          };
+        },
+        methods: {
+          async getKategori() {
+            try {
+              let total = await axios.get(this.url + "kategori");
+              total = total.data.datas.total;
+              axios.get(this.url + "kategori?per_page=" + total).then((d) => {
+                this.kategori = d.data.datas.data;
+              });
+            } catch (error) {}
+          },
+          nameKategori(kode, tag) {
+            let kategoriByTag = this.kategori.filter((k) => k.tag == tag);
+            let kategoriGetKode = kategoriByTag.find((k) => k.kode == kode);
+            if (kategoriGetKode) return kategoriGetKode.name;
+            else return "";
+          },
+          getPenduduk(suffix) {
+            this.penduduk = "";
+            var url = "";
+            if (suffix) url = this.url + suffix;
+            else
+              url =
+                this.url +
+                "penduduk/" +
+                this.kode +
+                "/list?status_stunting=" +
+                this.statusStuntingSelected;
+            axios.get(url).then((d) => {
+              this.penduduk = d.data.datas;
             });
-          } catch (error) { }
+          },
+          loadJS() {
+            const pluginsjs = document.createElement("script");
+            pluginsjs.setAttribute("src", "./assets/js/plugins.js");
+            document.head.appendChild(pluginsjs);
+            const themejs = document.createElement("script");
+            themejs.setAttribute("src", "./assets/js/theme.js");
+            document.head.appendChild(themejs);
+          },
         },
-        nameKategori(kode, tag) {
-          let kategoriByTag = this.kategori.filter((k) => k.tag == tag);
-          let kategoriGetKode = kategoriByTag.find((k) => k.kode == kode);
-          if (kategoriGetKode) return kategoriGetKode.name;
-          else return "";
+        mounted() {
+          this.getKategori().then(() => this.getPenduduk());
+          this.loadJS();
         },
-        getPenduduk(suffix) {
-          this.penduduk = "";
-          var url = "";
-          if (suffix) url = this.url + suffix;
-          else
-            url =
-              this.url +
-              "penduduk/" +
-              this.kode +
-              "/list?status_stunting=" +
-              this.statusStuntingSelected;
-          axios.get(url).then((d) => {
-            this.penduduk = d.data.datas;
-          });
+        watch: {
+          statusStuntingSelected() {
+            this.getPenduduk();
+            this.$refs["tabelStunting"].scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+              inline: "start",
+            });
+          },
         },
-        loadJS() {
-          const pluginsjs = document.createElement("script");
-          pluginsjs.setAttribute("src", "./assets/js/plugins.js");
-          document.head.appendChild(pluginsjs);
-          const themejs = document.createElement("script");
-          themejs.setAttribute("src", "./assets/js/theme.js");
-          document.head.appendChild(themejs);
-        },
-      },
-      mounted() {
-        this.getKategori().then(() => this.getPenduduk());
-        this.loadJS();
-      },
-      watch: {
-        statusStuntingSelected() {
-          this.getPenduduk();
-          this.$refs["tabelStunting"].scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-            inline: "start",
-          });
-        },
-      },
-    }).mount("#app");
-  </script>
-</body>
-
+      }).mount("#app");
+    </script>
+  </body>
 </html>
