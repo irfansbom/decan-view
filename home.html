@@ -164,9 +164,8 @@
           <div class="col-lg-6 text-white">
             <div data-cues="slideInDown" data-group="page-title" data-delay="600">
               <h1 class="display-1 text-white mb-4 h-15 mb-5" style="display: inline-block;" id="desa_text">
-                <span class="typer text-white" data-words="Selamat Datang di" data-loop="false"></span>
+                <span class="typer text-white" :data-words="'Selamat Datang di ' + infoWilayah.nama" data-loop="false"></span>
                 <br>
-                {{ infoWilayah.nama }}
                 <span class="cursor text-white" data-owner="typer"></span>
               </h1>
               <div data-cues="slideInDown" data-group="page-title" data-delay="600">
@@ -818,20 +817,21 @@
         };
       },
       methods: {
-        getWilayah() {
+        async getWilayah() {
           this.infoWilayah = [];
           // $('#desa_text').html("");
           nama_desa = "";
-          axios
+          await axios
             .get(
               this.url + "wilayah/" + this.kode + "/show"
             )
             .then((d) => {
               console.log(d.data.datas.result)
               this.infoWilayah = d.data.datas.result;
+              console.log(this.infoWilayah)
 
               nama_desa = '<span class="typer text-white" data-words="Selamat Datang di <br>' + d.data.datas.result.nama + '" data-loop="false"></span>   <span class="cursor text-white" data-owner="typer"></span> ';
-              $('#desa_text').append(nama_desa)
+              // $('#desa_text').append(nama_desa)
               this.infoWilayah.deskripsi = d.data.datas.deskripsi;
             });
         },
@@ -848,8 +848,7 @@
 
       },
       mounted() {
-        this.getWilayah();
-        this.loadJS();
+        this.getWilayah().then(() => this.loadJS());
       },
     }).mount("#app");
 

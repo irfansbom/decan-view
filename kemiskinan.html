@@ -441,7 +441,7 @@
               <!--/.card -->
             </div>
             <!--/column -->
-            <div class="col-12">
+            <div class="col-12 mb-6">
               <div class="card">
                 <div class="card-body">
                   <div class="row">
@@ -456,13 +456,12 @@
                               <th>Satuan Lingkungan Setempat</th>
                               <th>Alamat</th>
                               <th>Status Kesejahteraan</th>
+                              <th>Lokasi</th>
+                              <th>Bantuan</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr
-                              @click="getLokasi(k.latitude, k.longitude, k.nama_kepala)"
-                              v-for="k in keluarga.data"
-                            >
+                            <tr v-for="k in keluarga.data">
                               <td>{{ k.no_kk }}</td>
                               <td>{{ k.nama_kepala }}</td>
                               <td>{{ k.jumlah_art }}</td>
@@ -472,6 +471,20 @@
                                 {{
                                 statusKesejahteraanLabel[k.status_kesejahteraan]
                                 }}
+                              </td>
+                              <td>
+                                <a
+                                  class="btn btn-outline-primary btn-sm rounded-0"
+                                  @click="getLokasi(k.latitude, k.longitude, k.nama_kepala)"
+                                  >Lokasi</a
+                                >
+                              </td>
+                              <td>
+                                <a
+                                  class="btn btn-outline-primary btn-sm rounded-0"
+                                  @click="getBantuan(k.bantuan)"
+                                  >Bantuan</a
+                                >
                               </td>
                             </tr>
                           </tbody>
@@ -502,6 +515,63 @@
                 <!--/.card-body -->
               </div>
               <!--/.card -->
+            </div>
+            <!--/column -->
+            <div class="col-12" v-if="bantuan.length != 0">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="table-responsive" ref="tabelBantuan">
+                        <table class="table table-hover">
+                          <thead>
+                            <tr>
+                              <th>No KK</th>
+                              <th>NIK Penerima Bantuan</th>
+                              <th>Nama Kepala Keluarga</th>
+                              <th>Nama Bantuan</th>
+                              <th>Deskripsi Bantuan</th>
+                              <th>Bentuk Bantuan</th>
+                              <th>Instansi Pemberi Bantuan</th>
+                              <th>Waktu Bantuan</th>
+                              <th>Jumlah Bantuan</th>
+                              <th>Satuan Bantuan</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr v-for="b in bantuan">
+                              <td>{{ b.no_kk }}</td>
+                              <td>{{ b.nik }}</td>
+                              <td>{{ b.nama_kepala }}</td>
+                              <td>
+                                {{ nameKategoriBantuan(b.bantuan_id,
+                                "nama_bantuan") }}
+                              </td>
+                              <td>
+                                {{ nameKategoriBantuan(b.bantuan_id,
+                                "deskripsi_bantuan") }}
+                              </td>
+                              <td>
+                                {{ nameKategoriBantuan(b.bantuan_id,
+                                "bentuk_bantuan") }}
+                              </td>
+                              <td>
+                                {{ nameKategoriBantuan(b.bantuan_id,
+                                "instansi_pemberi") }}
+                              </td>
+                              <td>{{ b.waktu_bantuan }}</td>
+                              <td>{{ b.jumlah_bantuan }}</td>
+                              <td>{{ b.satuan_bantuan }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
             </div>
             <!--/column -->
           </div>
@@ -649,6 +719,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/chart.js/dist/chart.umd.js"></script>
+    <script src="https://unpkg.com/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.6.3.min.js"
       integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
@@ -697,13 +768,15 @@
         data() {
           return {
             url: "https://descan.bpssumsel.com/api/",
-            kode: "1601052001",
-            map: "",
-            markerMap: "",
-            tooltipMap: "",
-            keluarga: "",
-            statusKesejahteraanKeluarga: "",
-            statusKesejahteraanKeluargaPersentase: "",
+            kode: "1606021007",
+            map: null,
+            pointMap: {
+              marker: null,
+              tooltip: null,
+            },
+            keluarga: {},
+            statusKesejahteraanKeluarga: {},
+            statusKesejahteraanKeluargaPersentase: {},
             statusKesejahteraanSelected: "",
             statusKesejahteraanLabel: {
               1: "Sangat Miskin",
@@ -711,14 +784,19 @@
               3: "Tidak Miskin",
             },
             jumlahKeluarga: 0,
+            kategoriBantuan: {},
+            bantuan: [],
             show: false,
           };
         },
         methods: {
           createMap() {
+            if (this.map) this.map.remove();
+
             this.map = L.map(this.$refs["petaKemiskinan"], {
               attributionControl: false,
             }).setView([-2.990934, 104.756554], 7);
+
             L.tileLayer("https://{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}", {
               subdomains: ["mt0", "mt1", "mt2", "mt3"],
             }).addTo(this.map);
@@ -743,6 +821,7 @@
                     { intersect: true },
                     true
                   );
+
                   if (points.length)
                     for (k in this.statusKesejahteraanLabel)
                       if (
@@ -750,7 +829,9 @@
                         chart.data.labels[points[0].index]
                       )
                         this.statusKesejahteraanSelected = k;
+
                   this.getKeluarga();
+
                   this.$refs["tabelKemiskinan"].scrollIntoView({
                     behavior: "smooth",
                     block: "start",
@@ -763,6 +844,7 @@
                     callbacks: {
                       label: (context) => {
                         var index = context.dataset.data.indexOf(context.raw);
+
                         return (
                           Object.values(this.statusKesejahteraanKeluarga)[
                             index
@@ -781,7 +863,6 @@
             });
           },
           getStatusKesejahteraanKeluarga() {
-            this.statusKesejahteraanKeluarga = "";
             axios
               .get(
                 this.url +
@@ -791,12 +872,12 @@
               )
               .then((d) => {
                 this.statusKesejahteraanKeluarga = d.data.datas[0];
-                this.jumlahKeluarga = 0;
+
                 for (k in this.statusKesejahteraanKeluarga)
                   this.jumlahKeluarga += Number(
                     this.statusKesejahteraanKeluarga[k]
                   );
-                this.statusKesejahteraanKeluargaPersentase = {};
+
                 for (k in this.statusKesejahteraanKeluarga)
                   this.statusKesejahteraanKeluargaPersentase[k] =
                     Math.round(
@@ -805,11 +886,11 @@
                         100 *
                         100
                     ) / 100;
-                this.createChart();
+
+                setTimeout(() => this.createChart(), 100);
               });
           },
           getKeluarga(suffix) {
-            this.keluarga = "";
             var url = "";
             if (suffix) url = this.url + suffix;
             else
@@ -821,30 +902,86 @@
                 this.statusKesejahteraanSelected;
             axios.get(url).then((d) => {
               this.keluarga = d.data.datas;
-              this.show = this.keluarga.data.length != 0 ? true : false;
+
+              if (this.keluarga.data.length != 0) {
+                this.show = true;
+
+                setTimeout(() => this.createMap(), 100);
+              }
             });
           },
           getLokasi(lat, lng, nama) {
-            if (this.markerMap) this.map.removeLayer(this.markerMap);
-            if (this.tooltipMap) this.map.removeLayer(this.tooltipMap);
+            if (this.pointMap.marker)
+              this.map.removeLayer(this.pointMap.marker);
+
+            if (this.pointMap.tooltip)
+              this.map.removeLayer(this.pointMap.tooltip);
+
             if (lat && lng) {
-              this.markerMap = L.marker([lat, lng]).addTo(this.map);
-              this.tooltipMap = L.tooltip([lat, lng], {
+              this.pointMap.marker = L.marker([lat, lng]).addTo(this.map);
+              this.pointMap.tooltip = L.tooltip([lat, lng], {
                 content: nama,
                 permanent: true,
               }).addTo(this.map);
+
               this.map.setView([lat, lng], 20);
+
               this.$refs["petaKemiskinan"].scrollIntoView({
                 behavior: "smooth",
                 block: "start",
                 inline: "start",
               });
-            } else this.map.setView([-2.990934, 104.756554], 7);
+            } else {
+              this.map.setView([-2.990934, 104.756554], 7);
+
+              Swal.fire({
+                text: "Tidak ada lokasi",
+                toast: true,
+                showConfirmButton: false,
+                position: "center",
+                timer: 1000,
+                timerProgressBar: true,
+              });
+            }
+          },
+          getKategoriBantuan() {
+            axios.get(this.url + "master_bantuan").then((d) => {
+              this.kategoriBantuan = d.data.datas;
+            });
+          },
+          nameKategoriBantuan(id, tag) {
+            const bantuan = this.kategoriBantuan.find((b) => b.id == id);
+            if (bantuan) return bantuan[tag];
+            else return "";
+          },
+          getBantuan(bantuan) {
+            this.bantuan = bantuan;
+
+            if (this.bantuan.length != 0) {
+              setTimeout(
+                () =>
+                  this.$refs["tabelBantuan"].scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                    inline: "start",
+                  }),
+                100
+              );
+            } else
+              Swal.fire({
+                text: "Tidak ada bantuan",
+                toast: true,
+                showConfirmButton: false,
+                position: "center",
+                timer: 1000,
+                timerProgressBar: true,
+              });
           },
           loadJS() {
             const pluginsjs = document.createElement("script");
             pluginsjs.setAttribute("src", "./assets/js/plugins.js");
             document.head.appendChild(pluginsjs);
+
             const themejs = document.createElement("script");
             themejs.setAttribute("src", "./assets/js/theme.js");
             document.head.appendChild(themejs);
@@ -853,7 +990,7 @@
         mounted() {
           this.getStatusKesejahteraanKeluarga();
           this.getKeluarga();
-          this.createMap();
+          this.getKategoriBantuan();
           this.loadJS();
         },
       }).mount("#app");
