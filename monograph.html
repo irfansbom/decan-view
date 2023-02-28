@@ -87,7 +87,7 @@
                   <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="./home.html">Profile</a>
                     <ul class="dropdown-menu">
                       <li class="nav-item"><a class="dropdown-item" href="./monograph.html">Monograph</a></li>
-                      <li class="nav-item"><a class="dropdown-item" href="#">Organisasi</a></li>
+                      <li class="nav-item"><a class="dropdown-item" href="./organisasi.html">Organisasi</a></li>
                     </ul>
                   </li>
                   <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
@@ -166,15 +166,15 @@
                     style="max-height: 300px; max-width: 200px; height:100% ; width: 100%;"></figure>
               </div>
               <div class="col-md-6 text-center ">
-                <figure class="rounded mx-4"><img src="./assets/kabs-logo/logo1601.png"
-                    srcset="./assets/kabs-logo/logo1601.png 2x" alt=""
+                <figure class="rounded mx-4"><img :src="'./assets/kabs-logo/logo16'+infoWilayah.kode_kab+'.png'"
+                    :srcset="'./assets/kabs-logo/logo16'+ infoWilayah.kode_kab +'.png'" alt=""
                     style="max-height: 300px; max-width: 200px;  height:100% ; width: 100%;"></figure>
               </div>
             </div>
           </div>
           <div class="col-lg-6 text-white">
             <h2 class="display-4 mb-3 text-white">{{ infoWilayah.label }} {{ infoWilayah.nama }}</h2>
-            <p class="lead fs-lg mb-8 pe-xxl-2">{{infoWilayah.deskripsi}}</p>
+            <p class="lead fs-lg mb-8 pe-xxl-2">{{deskripsiWilayah}}</p>
             <div class="row gx-xl-10 gy-6" data-cues="slideInUp" data-group="services">
               <div class="col-6 col-md-6 col-lg-12 col-xl-6">
                 <button class="d-flex flex-row btn text-start p-0" id="btn_luas_wilayah">
@@ -720,22 +720,13 @@
                       <a href="https://www.youtube.com/channel/UC-9WQN-5cNTVTGDF8Rkiu6A" target="_blank"><i
                           class="uil uil-youtube"></i></a>
                     </nav>
-                    <!-- /.social -->
                   </div>
-                  <!--/.swiper-slide -->
-
                 </div>
-                <!--/.swiper-wrapper -->
               </div>
-              <!-- /.swiper -->
             </div>
-            <!-- /.swiper-container -->
           </div>
-
         </div>
-
       </div>
-      <!-- /.container -->
     </section>
   </div>
 
@@ -932,14 +923,16 @@
       data() {
         return {
           url: "https://descan.bpssumsel.com/api/",
-          kode: "1606",
+          kode: "1606021007",
           infoWilayah: [],
+          deskripsiWilayah: "",
           infoPengurus: []
         };
       },
       methods: {
         async getWilayah() {
           this.infoWilayah = [];
+          this.deskripsiWilayah = "";
           this.infoPengurus = [];
           await axios
             .get(
@@ -964,6 +957,16 @@
                 this.infoWilayah.label = "Provinsi";
                 this.infoWilayah.labelketua = "Gubernur";
               }
+            });
+        },
+        async getDeskripsi() {
+          this.deskripsiWilayah = "";
+          await axios
+            .get(
+              this.url + "wilayah/" + this.kode + "/deskripsi"
+            )
+            .then((d) => {
+              this.deskripsiWilayah = d.data.datas.deskripsi;
             });
         },
         async getPengurusLast() {
@@ -992,7 +995,8 @@
       },
       mounted() {
         this.getPengurusLast();
-        this.getWilayah().then(() =>
+        this.getWilayah();
+        this.getDeskripsi().then(() =>
           this.loadJS()
         ).then(() =>
           this.hideloader());
