@@ -791,4 +791,3 @@ var theme = {
     });
   },
 }
-theme.init();

@@ -311,84 +311,142 @@
         <div class="container py-6 py-md-8">
           <div class="row text-center">
             <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-              <h3 class="display-4 mb-2 px-xl-10">
-                Usaha Mikro Kecil Menengah
-              </h3>
-              <p>
-                <b>Usaha mikro kecil menengah</b> adalah istilah umum dalam
-                dunia ekonomi yang merujuk kepada usaha ekonomi produktif yang
-                dimiliki perorangan maupun badan usaha.
-                <b>UMKM</b>
-                dapat berarti bisnis yang dijalankan individu, rumah tangga,
-                atau badan usaha ukuran kecil.
-              </p>
-              <hr class="mt-2 mb-6" />
+              <h3 class="display-4 mb-10 px-xl-10">Penduduk</h3>
             </div>
           </div>
-          <div
-            class="row gx-lg-12 gx-xl-16 gy-4 text-center align-items-center"
-          >
-            <div class="col-12">
-              <div class="row">
-                <div class="col-xl-11 col-lg-10 col-md-9 col-sm-8 mb-2">
-                  <div class="form-floating">
-                    <input
-                      id="pencarian"
-                      type="text"
-                      class="form-control"
-                      placeholder="Pencarian"
-                      v-model="pencarian"
-                      @keyup.enter="getUMKM()"
-                    />
-                    <label for="pencarian">Pencarian</label>
-                  </div>
-                </div>
-                <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 mb-2">
-                  <a class="btn btn-primary rounded-0" @click="getUMKM()"
-                    >Cari!</a
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="col-12" v-for="u in umkm.data">
-              <div class="card gradient-7">
-                <div class="card-body">
-                  <h2 class="display-4 text-white mb-3">{{ u.nama_umkm }}</h2>
-                  <p class="lead fs-md text-white">
-                    Bergerak di Bidang {{ nameKategori(u.kategori_umkm,
-                    "lap_usaha") }}
-                  </p>
-                  <p class="d-flex justify-content-center text-white mb-1">
-                    <span v-html="u.deskripsi"></span>
-                  </p>
+          <div class="position-relative mb-4 mb-md-6">
+            <div
+              class="shape rounded-circle bg-soft-primary rellax w-16 h-16"
+              data-rellax-speed="1"
+              style="top: -0.5rem; right: -2.5rem; z-index: 0"
+            ></div>
+            <div
+              class="shape bg-dot primary rellax w-16 h-17"
+              data-rellax-speed="1"
+              style="top: -0.5rem; left: -2.5rem; z-index: 0"
+            ></div>
+            <div class="row gx-md-5 gy-5">
+              <div class="col-lg-6 d-flex align-items-stretch">
+                <div class="card w-100">
                   <div
-                    class="d-flex flex-row justify-content-center align-items-center"
+                    class="card-body d-flex justify-content-center align-items-center"
                   >
-                    <h1 class="display-3 text-white px-1">
-                      <i class="uil uil-user-circle"></i>
-                    </h1>
-                    <h4 class="text-white px-1">{{ u.nama_pemilik }}</h4>
+                    <canvas ref="pendidikanTerakhir"></canvas>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-12 d-flex justify-content-center">
-              <div class="table-responsive">
-                <nav aria-label="pagination umkm">
-                  <ul class="pagination">
-                    <li
-                      class="page-item"
-                      :class="{ disabled: l.active || !l.url }"
-                      v-for="l in umkm.links"
-                    >
-                      <a class="page-link" @click="getUMKM(l.url)"
-                        ><span
-                          v-html="l.label.replace('Previous', '').replace('Next', '')"
-                        ></span
-                      ></a>
-                    </li>
-                  </ul>
-                </nav>
+              <div class="col-lg-6 d-flex align-items-stretch">
+                <div class="card w-100">
+                  <div
+                    class="card-body d-flex justify-content-center align-items-center"
+                  >
+                    <canvas ref="jenisPekerjaan"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-xl-11 col-lg-10 col-md-9 col-sm-8 mb-2">
+                        <div class="form-floating">
+                          <input
+                            id="pencarian"
+                            type="text"
+                            class="form-control"
+                            placeholder="Pencarian"
+                            v-model="pencarian"
+                            @keyup.enter="getPenduduk()"
+                          />
+                          <label for="pencarian">Pencarian</label>
+                        </div>
+                      </div>
+                      <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 mb-2">
+                        <a
+                          class="btn btn-primary rounded-0"
+                          @click="getPenduduk()"
+                          >Cari!</a
+                        >
+                      </div>
+                      <div class="col-12 mb-2">
+                        <div class="table-responsive" ref="tabelPenduduk">
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>NIK</th>
+                                <th>No KK</th>
+                                <th>Nama Lengkap</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Tempat Lahir</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Umur</th>
+                                <th>Pendidikan Terakhir</th>
+                                <th>Status Pekerjaan</th>
+                                <th>Pekerjaan</th>
+                                <th>Jenis Pekerjaan</th>
+                                <th>Nama SLS</th>
+                                <th>Alamat</th>
+                                <th>Status Stunting</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr v-for="p in penduduk.data">
+                                <td>{{ p.nik }}</td>
+                                <td>{{ p.no_kk }}</td>
+                                <td>{{ p.nama_lengkap }}</td>
+                                <td>
+                                  {{ nameKategori(p.jenis_kelamin,
+                                  "jenis_kelamin") }}
+                                </td>
+                                <td>{{ p.tempat_lahir }}</td>
+                                <td>{{ p.tanggal_lahir }}</td>
+                                <td>{{ p.umur }}</td>
+                                <td>
+                                  {{ nameKategori(p.pendidikan_terakhir,
+                                  "pendidikan") }}
+                                </td>
+                                <td>
+                                  {{ p.status_pekerjaan == 1 ? "Bekerja" :
+                                  "Tidak Bekerja" }}
+                                </td>
+                                <td>{{ p.pekerjaan }}</td>
+                                <td>
+                                  {{ nameKategori(p.jenis_pekerjaan,
+                                  "lap_usaha") }}
+                                </td>
+                                <td>{{ p.nama_sls }}</td>
+                                <td>{{ p.alamat }}</td>
+                                <td>
+                                  {{ nameKategori(p.status_stunting, "stunting")
+                                  }}
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="col-12 d-flex justify-content-center">
+                        <div class="table-responsive">
+                          <nav aria-label="pagination penduduk">
+                            <ul class="pagination">
+                              <li
+                                class="page-item"
+                                :class="{ disabled: l.active || !l.url }"
+                                v-for="l in penduduk.links"
+                              >
+                                <a class="page-link" @click="getPenduduk(l.url)"
+                                  ><span
+                                    v-html="l.label.replace('Previous', '').replace('Next', '')"
+                                  ></span
+                                ></a>
+                              </li>
+                            </ul>
+                          </nav>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -498,7 +556,6 @@
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/chart.js/dist/chart.umd.js"></script>
     <script>
       const { createApp } = Vue;
@@ -507,12 +564,25 @@
         data() {
           return {
             url: "https://descan.bpssumsel.com/api/",
-            // kode: "1606021007",
-            kode: "1601052001",
+            kode: "1606021007",
             wilayah: {},
             deskripsi: "",
             kategori: [],
-            umkm: {},
+            penduduk: {},
+            pendidikanTerakhir: { sd: 100, smp: 50, sma: 20 },
+            pendidikanTerakhirLabel: { 3: "SD", 8: "SMP", 13: "SMA" },
+            pendidikanTerakhirSelected: "",
+            jenisPekerjaan: {
+              pertanian_tanaman_padi_dan_palawija: 1000,
+              hortikultura: 250,
+              perkebunan: 50,
+            },
+            jenisPekerjaanLabel: {
+              1: "Pertanian tanaman padi & palawija",
+              2: "Hortikultura",
+              3: "Perkebunan",
+            },
+            jenisPekerjaanSelected: "",
             pencarian: "",
             show: false,
             preloader: true,
@@ -554,14 +624,125 @@
                 this.deskripsi = d.data.datas.deskripsi;
               });
           },
+          createChart() {
+            const chartPendidikanTerakhir = new Chart(
+              this.$refs["pendidikanTerakhir"],
+              {
+                type: "bar",
+                data: {
+                  labels: Object.values(this.pendidikanTerakhirLabel),
+                  datasets: [
+                    {
+                      label: "Pendidikan Terakhir",
+                      data: Object.values(this.pendidikanTerakhir),
+                    },
+                  ],
+                },
+                options: {
+                  indexAxis: "y",
+                  onClick: (e) => {
+                    const points =
+                      chartPendidikanTerakhir.getElementsAtEventForMode(
+                        e,
+                        "point",
+                        { intersect: true },
+                        true
+                      );
+
+                    if (points.length) {
+                      for (p in this.pendidikanTerakhirLabel)
+                        if (
+                          this.pendidikanTerakhirLabel[p] ==
+                          chartPendidikanTerakhir.data.labels[points[0].index]
+                        )
+                          this.pendidikanTerakhirSelected = p;
+
+                      this.getPenduduk();
+
+                      this.$refs["tabelPenduduk"].scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                        inline: "start",
+                      });
+                    }
+                  },
+                  plugins: {
+                    title: {
+                      display: true,
+                      text: "Jumlah Penduduk Berdasarkan Pendidikan Terakhir",
+                      font: {
+                        size: 18,
+                      },
+                    },
+                  },
+                },
+              }
+            );
+
+            const chartJenisPekerjaan = new Chart(
+              this.$refs["jenisPekerjaan"],
+              {
+                type: "bar",
+                data: {
+                  labels: Object.values(this.jenisPekerjaanLabel),
+                  datasets: [
+                    {
+                      label: "Jenis Pekerjaan",
+                      data: Object.values(this.jenisPekerjaan),
+                    },
+                  ],
+                },
+                options: {
+                  indexAxis: "y",
+                  onClick: (e) => {
+                    const points =
+                      chartJenisPekerjaan.getElementsAtEventForMode(
+                        e,
+                        "point",
+                        { intersect: true },
+                        true
+                      );
+
+                    if (points.length) {
+                      for (p in this.jenisPekerjaanLabel)
+                        if (
+                          this.jenisPekerjaanLabel[p] ==
+                          chartJenisPekerjaan.data.labels[points[0].index]
+                        )
+                          this.jenisPekerjaanSelected = p;
+
+                      this.getPenduduk();
+
+                      this.$refs["tabelPenduduk"].scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                        inline: "start",
+                      });
+                    }
+                  },
+                  plugins: {
+                    title: {
+                      display: true,
+                      text: "Jumlah Penduduk Berdasarkan Jenis Pekerjaan",
+                      font: {
+                        size: 18,
+                      },
+                    },
+                  },
+                },
+              }
+            );
+          },
           async getKategori() {
             let total = await axios.get(this.url + "kategori");
 
             total = total.data.datas.total;
 
-            axios.get(this.url + "kategori?per_page=" + total).then((d) => {
-              this.kategori = d.data.datas.data;
-            });
+            await axios
+              .get(this.url + "kategori?per_page=" + total)
+              .then((d) => {
+                this.kategori = d.data.datas.data;
+              });
           },
           nameKategori(kode, tag) {
             let kategoriByTag = this.kategori.filter((k) => k.tag == tag);
@@ -569,21 +750,26 @@
             if (kategoriGetKode) return kategoriGetKode.name;
             else return "";
           },
-          async getUMKM(suffix) {
+          async getPenduduk(suffix) {
             var url = "";
 
             if (suffix) url = this.url + suffix;
             else
               url =
                 this.url +
-                "umkm/" +
+                "penduduk/" +
                 this.kode +
-                "/list?keyword=" +
+                "/list?pendidikan_terakhir=" +
+                this.pendidikanTerakhirSelected +
+                "&jenis_pekerjaan=" +
+                this.jenisPekerjaanSelected +
+                "&keyword=" +
                 this.pencarian;
 
             await axios.get(url).then((d) => {
-              this.umkm = d.data.datas;
-              this.show = this.umkm.data.length != 0 ? true : false;
+              this.penduduk = d.data.datas;
+
+              if (this.penduduk.data.length != 0) this.show = true;
             });
           },
           loadJS() {
@@ -603,8 +789,21 @@
             .then(() => this.getDeskripsi())
             .then(() => setTimeout(() => this.loadJS(), 100))
             .then(() => (this.preloader = false));
-          this.getKategori();
-          this.getUMKM();
+          this.getKategori().then(() =>
+            setTimeout(() => this.createChart(), 100)
+          );
+          this.getPenduduk();
+        },
+        watch: {
+          statusStuntingSelected() {
+            this.getPenduduk();
+
+            this.$refs["tabelStunting"].scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+              inline: "start",
+            });
+          },
         },
       }).mount("#app");
     </script>
