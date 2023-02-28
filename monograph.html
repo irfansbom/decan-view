@@ -932,8 +932,8 @@
       methods: {
         async getWilayah() {
           this.infoWilayah = [];
-          this.deskripsiWilayah = "";
-          this.infoPengurus = [];
+          var kotas = ['71', '72', '73', '74'];
+          var kabs = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13'];
           await axios
             .get(
               this.url + "wilayah/" + this.kode + "/show"
@@ -947,10 +947,10 @@
               } else if (d.data.datas.result.kode_kec != "000") {
                 this.infoWilayah.label = "Kecamatan";
                 this.infoWilayah.labelketua = "Camat";
-              } else if (d.data.datas.result.kode_kab != '00') {
+              } else if (kabs.includes(d.data.datas.result.kode_kab)) {
                 this.infoWilayah.label = "Kabupaten";
                 this.infoWilayah.labelketua = "Bupati";
-              } else if (d.data.datas.result.kode_kab.include('71', '72', '73', '74')) {
+              } else if (kotas.includes(d.data.datas.result.kode_kab)) {
                 this.infoWilayah.label = "Kota";
                 this.infoWilayah.labelketua = "Walikota";
               } else {
@@ -988,6 +988,7 @@
           themejs.setAttribute("src", "./assets/js/theme.js");
           document.head.appendChild(themejs);
           // this.hideloader();
+          setTimeout(() => theme.init(), 100);
         },
         hideloader() {
           $('.preloader').hide();

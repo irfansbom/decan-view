@@ -164,7 +164,7 @@
     </header>
 
     <section class="wrapper  ">
-      <div class="container pt-6 pt-md-15 pt-xl-18  pb-8 pb-xl-21">
+      <div class="container pt-6 pt-md-15 pt-xl-18 pb-8 pb-xl-21">
         <div class="row gx-lg-8 gy-8 mt-5 mt-md-12 mt-lg-0 mb-8 align-items-center">
           <div class="col-lg-6 order-lg-2">
             <div class="row gx-md-5 gy-5" data-cues="fadeIn" data-group="images">
@@ -184,12 +184,11 @@
             <div data-cues="slideInDown" data-group="page-title" data-delay="600">
               <h1 class="display-1 text-white mb-4 h-20 mb-5" style="display: inline-block;" id="desa_text">
                 <span class="typer text-white"
-                  :data-words="'Selamat Datang di '+ infoWilayah.label+'<br>' + infoWilayah.nama "
-                  data-loop="false"></span>
+                  :data-words="'Selamat Datang di '+ infoWilayah.label+ ' '+infoWilayah.nama " data-loop="false"></span>
                 <span class="cursor text-white" data-owner="typer"></span>
               </h1>
               <div data-cues="slideInDown" data-group="page-title" data-delay="600">
-                <p class="lead fs-24 lh-sm text-white mb-5 " style="min-height: 300px;">
+                <p class="lead fs-24 lh-sm text-white mb-5 ">
                   {{ deskripsiWilayah }}
                 </p>
               </div>
@@ -300,6 +299,8 @@
       methods: {
         async getWilayah() {
           this.infoWilayah = [];
+          var kotas = ['71', '72', '73', '74'];
+          var kabs = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13'];
           await axios
             .get(
               this.url + "wilayah/" + this.kode + "/show"
@@ -310,8 +311,10 @@
                 this.infoWilayah.label = "Desa/Kelurahan";
               } else if (d.data.datas.result.kode_kec != "000") {
                 this.infoWilayah.label = "Kecamatan";
-              } else if (d.data.datas.result.kode_kab != "000") {
-                this.infoWilayah.label = "Kabupaten/Kota";
+              } else if (kabs.includes(d.data.datas.result.kode_kab)) {
+                this.infoWilayah.label = "Kabupaten";
+              } else if (kotas.includes(d.data.datas.result.kode_kab)) {
+                this.infoWilayah.label = "Kota";
               } else {
                 this.infoWilayah.label = "Provinsi";
               }
@@ -335,6 +338,7 @@
           themejs.setAttribute("src", "./assets/js/theme.js");
           document.head.appendChild(themejs);
           // this.hideloader();
+          setTimeout(() => theme.init(), 100);
         },
         hideloader() {
           $('.preloader').hide();

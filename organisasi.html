@@ -199,7 +199,7 @@
                 <div class="row gx-lg-8 gx-xl-12 gy-12 align-items-center px-4 mb-3"
                     v-for="pengurus in listPengurus.data">
                     <div class="card border border-secondary">
-                        <div class="card-body px-0">
+                        <div class="card-body px-0 pb-lg-4 pb-2">
                             <div class="row">
                                 <div class="col-5 col-lg-2 position-relative">
                                     <figure class="rounded text-center"><img :src="pengurus.ftoo"
@@ -232,7 +232,15 @@
                                             <b> {{ pengurus.nama_sekretaris }} </b>
                                         </div>
                                     </div>
-                                    <div class="accordion accordion-wrapper" :id="'accordion'+pengurus.id">
+                                    <div class="row mb-3">
+                                        <div class="col-12 col-lg-4">
+                                            Pengurus Lainnya :
+                                        </div>
+                                        <div class="col-12 col-lg-7" v-html="pengurus.pengurus_lainnya">
+
+                                        </div>
+                                    </div>
+                                    <!-- <div class="accordion accordion-wrapper" :id="'accordion'+pengurus.id">
                                         <div class="card plain accordion-item">
                                             <div class="card-header" :id="'heading'+pengurus.id">
                                                 <button class="collapsed" data-bs-toggle="collapse"
@@ -248,8 +256,7 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                    </div>
+                                    </div> -->
                                 </div>
 
                                 <div class="col-12 col-md-6 col-lg-2 d-flex align-items-center justify-content-center">
@@ -372,8 +379,8 @@
             methods: {
                 async getWilayah() {
                     this.infoWilayah = [];
-                    this.deskripsiWilayah = "";
-                    this.listPengurus = [];
+                    var kotas = ['71', '72', '73', '74'];
+                    var kabs = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13'];
                     await axios
                         .get(
                             this.url + "wilayah/" + this.kode + "/show"
@@ -387,10 +394,10 @@
                             } else if (d.data.datas.result.kode_kec != "000") {
                                 this.infoWilayah.label = "Kecamatan";
                                 this.infoWilayah.labelketua = "Camat";
-                            } else if (d.data.datas.result.kode_kab != '00') {
+                            } else if (kabs.includes(d.data.datas.result.kode_kab)) {
                                 this.infoWilayah.label = "Kabupaten";
                                 this.infoWilayah.labelketua = "Bupati";
-                            } else if (d.data.datas.result.kode_kab.include('71', '72', '73', '74')) {
+                            } else if (kotas.includes(d.data.datas.result.kode_kab)) {
                                 this.infoWilayah.label = "Kota";
                                 this.infoWilayah.labelketua = "Walikota";
                             } else {
@@ -429,6 +436,7 @@
                     themejs.setAttribute("src", "./assets/js/theme.js");
                     document.head.appendChild(themejs);
                     // this.hideloader();
+                    setTimeout(() => theme.init(), 100);
                 },
                 hideloader() {
                     $('.preloader').hide();
