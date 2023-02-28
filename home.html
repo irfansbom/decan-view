@@ -96,7 +96,7 @@
                   <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="./home.html">Profile</a>
                     <ul class="dropdown-menu">
                       <li class="nav-item"><a class="dropdown-item" href="./monograph.html">Monograph</a></li>
-                      <li class="nav-item"><a class="dropdown-item" href="#">Organisasi</a></li>
+                      <li class="nav-item"><a class="dropdown-item" href="./organisasi.html">Organisasi</a></li>
                     </ul>
                   </li>
                   <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
@@ -174,8 +174,8 @@
                     style="max-height: 300px; max-width: 200px; height:100% ; width: 100%;"></figure>
               </div>
               <div class="col-md-6 text-center ">
-                <figure class="rounded mx-4"><img src="./assets/kabs-logo/logo1601.png"
-                    srcset="./assets/kabs-logo/logo1601.png 2x" alt=""
+                <figure class="rounded mx-4"><img :src="'./assets/kabs-logo/logo16'+infoWilayah.kode_kab+'.png'"
+                    :srcset="'./assets/kabs-logo/logo16'+ infoWilayah.kode_kab +'.png'" alt=""
                     style="max-height: 300px; max-width: 200px;  height:100% ; width: 100%;"></figure>
               </div>
             </div>
@@ -190,7 +190,7 @@
               </h1>
               <div data-cues="slideInDown" data-group="page-title" data-delay="600">
                 <p class="lead fs-24 lh-sm text-white mb-5 " style="min-height: 300px;">
-                  {{ infoWilayah.deskripsi }}
+                  {{ deskripsiWilayah }}
                 </p>
               </div>
 
@@ -288,13 +288,13 @@
     integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
   <script>
     const { createApp } = Vue;
-
     createApp({
       data() {
         return {
           url: "https://descan.bpssumsel.com/api/",
           kode: "1606021007",
-          infoWilayah: []
+          infoWilayah: [],
+          deskripsiWilayah: "",
         };
       },
       methods: {
@@ -306,8 +306,6 @@
             )
             .then((d) => {
               this.infoWilayah = d.data.datas.result;
-              this.infoWilayah.deskripsi = d.data.datas.deskripsi;
-              // this.infoWilayah.label = "";
               if (d.data.datas.result.kode_desa != "000") {
                 this.infoWilayah.label = "Desa/Kelurahan";
               } else if (d.data.datas.result.kode_kec != "000") {
@@ -317,6 +315,16 @@
               } else {
                 this.infoWilayah.label = "Provinsi";
               }
+            });
+        },
+        async getDeskripsi() {
+          this.deskripsiWilayah = "";
+          await axios
+            .get(
+              this.url + "wilayah/" + this.kode + "/deskripsi"
+            )
+            .then((d) => {
+              this.deskripsiWilayah = d.data.datas.deskripsi;
             });
         },
         loadJS() {
@@ -333,7 +341,8 @@
         }
       },
       mounted() {
-        this.getWilayah().then(() =>
+        this.getWilayah();
+        this.getDeskripsi().then(() =>
           this.loadJS()
         ).then(() =>
           this.hideloader());
